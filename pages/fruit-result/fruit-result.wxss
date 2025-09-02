@@ -1,0 +1,239 @@
+/* pages/fruit-result/index.wxss */
+.container {
+  padding: 20rpx;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+.result-image {
+  position: relative;
+  margin-bottom: 30rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.result-image image {
+  width: 100%;
+  height: 400rpx;
+  display: block;
+}
+
+.status-tag {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  background: #10b981;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.result-card {
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.fruit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30rpx;
+}
+
+.price-section {
+  text-align: right;
+}
+
+.price {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #10b981;
+  display: block;
+}
+
+.unit {
+  font-size: 20rpx;
+  color: #667085;
+}
+
+.key-info-grid {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40rpx;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-icon {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10rpx;
+}
+
+.bg-red {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.bg-yellow {
+  background: #fef3c7;
+  color: #f59e0b;
+}
+
+.bg-green {
+  background: #dcfce7;
+  color: #22c55e;
+}
+
+.icon-water, .icon-sweet, .icon-leaf {
+  font-size: 32rpx;
+}
+
+.label {
+  font-size: 20rpx;
+  color: #667085;
+  margin-bottom: 5rpx;
+}
+
+.value {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #182135;
+}
+
+.nutrition-section {
+  margin-top: 30rpx;
+}
+
+.nutrition-item {
+  margin-bottom: 20rpx;
+}
+
+.nutrition-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+  font-size: 24rpx;
+}
+
+.nutrition-bar {
+  height: 12rpx;
+  border-radius: 6rpx;
+}
+
+.health-tip {
+  padding: 30rpx;
+  background: #eff6ff;
+  margin-bottom: 30rpx;
+}
+
+.tip-content {
+  display: flex;
+}
+
+.tip-icon {
+  width: 60rpx;
+  height: 60rpx;
+  background: #3b82f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+}
+
+.icon-heart {
+  color: white;
+  font-size: 32rpx;
+}
+
+.similar-section {
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.similar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.similar-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: #f9fafb;
+  border-radius: 16rpx;
+}
+
+.fruit-thumb {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 12rpx;
+  margin-right: 20rpx;
+}
+
+.compare-btn {
+  background: #f0f4ff;
+  color: #0052d9;
+  border: none;
+  border-radius: 12rpx;
+  padding: 10rpx 20rpx;
+  font-size: 24rpx;
+}
+
+.action-section {
+  padding: 0 30rpx 30rpx;
+}
+
+.action-grid {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  border: none;
+}
+
+.primary {
+  background: #10b981;
+  color: white;
+}
+
+.secondary {
+  background: #3b82f6;
+  color: white;
+}
+
+.icon-plus, .icon-heart {
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+
+.view-detail-btn {
+  width: 100%;
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  border-radius: 12rpx;
+  padding: 25rpx;
+  font-size: 26rpx;
+}

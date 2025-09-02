@@ -1,0 +1,174 @@
+/* pages/fruit-identify/index.wxss */
+.container {
+  padding: 20rpx;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+.camera-view {
+  position: relative;
+  margin-bottom: 30rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.scan-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan-frame {
+  width: 400rpx;
+  height: 400rpx;
+  position: relative;
+}
+
+.corner {
+  position: absolute;
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid #ffffff;
+}
+
+.top-left {
+  top: 20rpx;
+  left: 20rpx;
+  border-right: none;
+  border-bottom: none;
+}
+
+.top-right {
+  top: 20rpx;
+  right: 20rpx;
+  border-left: none;
+  border-bottom: none;
+}
+
+.bottom-left {
+  bottom: 20rpx;
+  left: 20rpx;
+  border-right: none;
+  border-top: none;
+}
+
+.bottom-right {
+  bottom: 20rpx;
+  right: 20rpx;
+  border-left: none;
+  border-top: none;
+}
+
+.scan-tip {
+  position: absolute;
+  top: 40rpx;
+  left: 40rpx;
+  right: 40rpx;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  padding: 15rpx;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+}
+
+.mode-selection {
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.mode-grid {
+  display: flex;
+  gap: 30rpx;
+}
+
+.mode-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  background: white;
+}
+
+.mode-btn.active {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+.mode-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.history-section {
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.view-all {
+  color: #10b981;
+  font-size: 24rpx;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: #f9fafb;
+  border-radius: 16rpx;
+}
+
+.fruit-thumb {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 12rpx;
+  margin-right: 20rpx;
+}
+
+.arrow {
+  color: #9ca3af;
+  font-size: 28rpx;
+}
+
+.capture-section {
+  padding: 0 30rpx 30rpx;
+}
+
+.capture-btn {
+  width: 100%;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-camera {
+  font-size: 32rpx;
+  margin-right: 20rpx;
+}

@@ -1,0 +1,122 @@
+<view class="container">
+  <!-- 健康档案卡片 -->
+  <view class="health-card card">
+    <view class="card-header">
+      <text class="title">我的健康档案</text>
+      <button class="edit-btn" bindtap="editHealthData">
+        <text class="icon-edit">&#9998;</text>
+        <text class="btn-text">编辑</text>
+      </button>
+    </view>
+    
+    <view class="health-grid">
+      <view class="health-item">
+        <view class="item-icon bg-red">
+          <text class="icon-heart">&#128157;</text>
+        </view>
+        <view class="item-content">
+          <text class="label">血糖水平</text>
+          <text class="value">正常</text>
+        </view>
+      </view>
+      <view class="health-item">
+        <view class="item-icon bg-blue">
+          <text class="icon-weight">&#128171;</text>
+        </view>
+        <view class="item-content">
+          <text class="label">体重管理</text>
+          <text class="value">减脂期</text>
+        </view>
+      </view>
+      <view class="health-item">
+        <view class="item-icon bg-green">
+          <text class="icon-allergy">&#128172;</text>
+        </view>
+        <view class="item-content">
+          <text class="label">过敏史</text>
+          <text class="value">无</text>
+        </view>
+      </view>
+      <view class="health-item">
+        <view class="item-icon bg-purple">
+          <text class="icon-taste">&#127853;</text>
+        </view>
+        <view class="item-content">
+          <text class="label">口味偏好</text>
+          <text class="value">偏甜</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 推荐标签 -->
+  <view class="tags-section card">
+    <text class="title mb-20">推荐标签</text>
+    <view class="tags-container">
+      <text class="tag tag-green">低热量</text>
+      <text class="tag tag-blue">高水分</text>
+      <text class="tag tag-purple">当季水果</text>
+      <text class="tag tag-yellow">减脂友好</text>
+      <text class="tag tag-red">维C丰富</text>
+    </view>
+  </view>
+
+  <!-- 今日推荐 -->
+  <view class="recommend-section card">
+    <text class="title mb-30">今日推荐</text>
+    
+    <!-- 推荐水果列表 -->
+    <view class="recommend-list">
+      <view class="recommend-item" wx:for="{{recommendations}}" wx:key="rank">
+        <view class="rank-badge">{{item.rank}}</view>
+        <image class="fruit-image" src="{{item.image}}"></image>
+        <view class="item-content">
+          <view class="item-header">
+            <text class="title">{{item.name}}</text>
+            <view class="rating">
+              <text class="star">&#9733;</text>
+              <text class="score">{{item.rating}}</text>
+            </view>
+          </view>
+          <text class="subtitle mt-10">{{item.description}}</text>
+          <view class="item-footer mt-20">
+            <text class="price">{{item.price}}</text>
+            <view class="tags">
+              <text class="tag {{item.tagClass}}" wx:for="{{item.tags}}" wx:key="index">{{item}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 推荐说明 -->
+  <view class="explanation card">
+    <view class="section-header">
+      <text class="icon-light">&#128161;</text>
+      <text class="title ml-10">推荐说明</text>
+    </view>
+    <view class="explanation-list mt-20">
+      <view class="explanation-item">
+        <text class="icon-check">&#10003;</text>
+        <text class="explanation-text">基于您的减脂需求，优先推荐低热量水果</text>
+      </view>
+      <view class="explanation-item mt-10">
+        <text class="icon-check">&#10003;</text>
+        <text class="explanation-text">考虑您的口味偏好，选择甜度适中的品种</text>
+      </view>
+      <view class="explanation-item mt-10">
+        <text class="icon-check">&#10003;</text>
+        <text class="explanation-text">当季水果，营养价值和口感更佳</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="refresh-section">
+    <button class="refresh-btn" bindtap="refreshRecommendations">
+      <text class="icon-refresh">&#10227;</text>
+      <text class="btn-text">重新生成推荐</text>
+    </button>
+  </view>
+</view>

@@ -1,0 +1,173 @@
+<!--pages/fruit-compare/fruit-compare.wxml-->
+
+<view class="container">
+  <!-- 对比水果列表 -->
+  <view class="comparison-list card">
+    <scroll-view class="scroll-container" scroll-x="true">
+      <view class="fruit-items">
+        <view class="fruit-item" wx:for="{{comparisonFruits}}" wx:key="id">
+          <image class="fruit-image" src="{{item.image}}" lazy-load="true"></image>
+          <text class="fruit-name">{{item.name}}</text>
+          <text class="fruit-price">{{item.price}}</text>
+          <button class="remove-btn" bindtap="removeFruit" data-id="{{item.id}}">
+            <text class="icon-remove">&#10005;</text>
+            <text class="btn-text">移除</text>
+          </button>
+        </view>
+        <view class="add-more" bindtap="addMoreFruits">
+          <view class="add-icon">
+            <text class="icon-plus">&#10133;</text>
+          </view>
+          <text class="add-text">添加水果</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 对比结果总结 -->
+  <view class="recommend-summary card">
+    <text class="title">智能推荐</text>
+    <text class="summary-text mt-20">
+      根据您的健康档案，推荐选择
+      <text class="highlight">麒麟西瓜</text>：
+      价格适中，甜度高，适合日常补水需求。
+    </text>
+  </view>
+
+  <!-- 详细对比表格 -->
+  <view class="comparison-table card">
+    <!-- 表头 -->
+    <view class="table-header">
+      <view class="header-cell"></view>
+      <view class="header-cell" wx:for="{{comparisonFruits}}" wx:key="id">{{item.name}}</view>
+    </view>
+    
+    <!-- 价格对比 -->
+    <view class="table-row">
+      <view class="row-label">价格</view>
+      <view class="row-cell" wx:for="{{priceData}}" wx:key="index">
+        <text class="value {{item.isBest ? 'best' : ''}}">{{item.value}}</text>
+        <text class="tag" wx:if="{{item.isBest}}">最优</text>
+      </view>
+    </view>
+    
+    <!-- 甜度对比 -->
+    <view class="table-row">
+      <view class="row-label">甜度</view>
+      <view class="row-cell" wx:for="{{sweetnessData}}" wx:key="index">
+        <text class="value {{item.isBest ? 'best' : ''}}">{{item.value}}</text>
+        <text class="tag" wx:if="{{item.isBest}}">最甜</text>
+      </view>
+    </view>
+    
+    <!-- 水分对比 -->
+    <view class="table-row">
+      <view class="row-label">水分</view>
+      <view class="row-cell" wx:for="{{waterData}}" wx:key="index">
+        <text class="value {{item.isBest ? 'best' : ''}}">{{item.value}}</text>
+        <text class="tag" wx:if="{{item.isBest}}">最高</text>
+      </view>
+    </view>
+    
+    <!-- 热量对比 -->
+    <view class="table-row">
+      <view class="row-label">热量</view>
+      <view class="row-cell" wx:for="{{calorieData}}" wx:key="index">
+        <text class="value {{item.isBest ? 'best' : ''}}">{{item.value}}</text>
+        <text class="tag" wx:if="{{item.isBest}}">最低</text>
+      </view>
+    </view>
+    
+    <!-- 维生素C对比 -->
+    <view class="table-row">
+      <view class="row-label">维生素C</view>
+      <view class="row-cell" wx:for="{{vitaminCData}}" wx:key="index">
+        <text class="value {{item.isBest ? 'best' : ''}}">{{item.value}}</text>
+        <text class="tag" wx:if="{{item.isBest}}">最高</text>
+      </view>
+    </view>
+    
+    <!-- 口感评分 -->
+    <view class="table-row">
+      <view class="row-label">口感评分</view>
+      <view class="row-cell" wx:for="{{tasteData}}" wx:key="index">
+        <view class="stars">
+          <text class="star {{item.filled >= 1 ? 'filled' : ''}}">&#9733;</text>
+          <text class="star {{item.filled >= 2 ? 'filled' : ''}}">&#9733;</text>
+          <text class="star {{item.filled >= 3 ? 'filled' : ''}}">&#9733;</text>
+          <text class="star {{item.filled >= 4 ? 'filled' : ''}}">&#9733;</text>
+          <text class="star {{item.filled >= 5 ? 'filled' : ''}}">&#9733;</text>
+        </view>
+        <text class="score">{{item.score}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 可视化对比 -->
+  <view class="visualization card" wx:if="{{chartsLoaded}}">
+    <text class="title mb-30">营养对比可视化</text>
+    
+    <!-- 价格对比条 -->
+    <view class="chart-section mb-40">
+      <view class="chart-header">
+        <text class="label">价格对比</text>
+        <text class="desc">越低越好</text>
+      </view>
+      <view class="chart-bars">
+        <view class="bar-item" wx:for="{{priceBars}}" wx:key="index">
+          <text class="bar-label">{{item.label}}</text>
+          <view class="bar-container">
+            <progress class="bar" percent="{{item.percent}}" activeColor="{{item.color}}" />
+          </view>
+          <text class="bar-value">{{item.value}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 甜度对比条 -->
+    <view class="chart-section">
+      <view class="chart-header">
+        <text class="label">甜度对比</text>
+        <text class="desc">越高越好</text>
+      </view>
+      <view class="chart-bars">
+        <view class="bar-item" wx:for="{{sweetnessBars}}" wx:key="index">
+          <text class="bar-label">{{item.label}}</text>
+          <view class="bar-container">
+            <progress class="bar" percent="{{item.percent}}" activeColor="{{item.color}}" />
+          </view>
+          <text class="bar-value">{{item.value}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 图表骨架屏 -->
+  <view class="visualization card" wx:else>
+    <text class="title mb-30">营养对比可视化</text>
+    
+    <!-- 价格对比条骨架屏 -->
+    <view class="chart-section mb-40">
+      <view class="chart-header">
+        <text class="label">价格对比</text>
+        <text class="desc">越低越好</text>
+      </view>
+      <view class="chart-bars">
+        <view class="bar-item">
+          <text class="bar-label bg-gray-200 h-24rpx w-80rpx"></text>
+          <view class="bar-container">
+            <view class="bar bg-gray-200 h-12rpx rounded-6rpx"></view>
+          </view>
+          <text class="bar-value bg-gray-200 h-24rpx w-60rpx"></text>
+        </view>
+        <view class="bar-item">
+          <text class="bar-label bg-gray-200 h-24rpx w-80rpx"></text>
+          <view class="bar-container">
+            <view class="bar bg-gray-200 h-12rpx rounded-6rpx"></view>
+          </view>
+          <text class="bar-value bg-gray-200 h-24rpx w-60rpx"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

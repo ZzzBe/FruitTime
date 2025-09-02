@@ -1,0 +1,95 @@
+/* pages/homepage/homepage.wxss */
+
+.container {
+  padding: 20rpx;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  padding: 60rpx 30rpx;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-radius: 24rpx;
+  margin-bottom: 30rpx;
+}
+
+.header .title {
+  font-size: 48rpx;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.header .subtitle {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.search-bar {
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+}
+
+.search-input {
+  background: #f0f4ff;
+  border-radius: 12rpx;
+  padding: 10rpx 20rpx;
+}
+
+.icon-search {
+  margin-right: 20rpx;
+  color: #667085;
+}
+
+.input {
+  background: transparent;
+  font-size: 26rpx;
+  padding: 10rpx 0;
+}
+
+.camera-btn {
+  border-radius: 8rpx;
+  margin-left: 20rpx;
+}
+
+.icon-camera {
+  color: white;
+}
+
+.modules-container {
+  margin-bottom: 30rpx;
+}
+
+.module-card {
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.module-card:active {
+  transform: translateY(-4rpx);
+  box-shadow: 0 12rpx 32rpx rgba(140, 155, 184, 0.16);
+}
+
+.module-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-header {
+  margin-bottom: 30rpx;
+}
+
+.recommend-item {
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.fruit-image {
+  width: 100%;
+  height: 240rpx;
+  display: block;
+}

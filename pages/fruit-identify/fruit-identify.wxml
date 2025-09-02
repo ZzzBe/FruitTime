@@ -1,0 +1,97 @@
+<view class="container">
+  <!-- 相机预览区域 -->
+  <view class="camera-view">
+    <camera 
+      device-position="back" 
+      flash="auto" 
+      binderror="cameraError"
+      style="width: 100%; height: 400rpx;">
+    </camera>
+    
+    <!-- 扫描框 -->
+    <view class="scan-overlay">
+      <view class="scan-frame">
+        <view class="corner top-left"></view>
+        <view class="corner top-right"></view>
+        <view class="corner bottom-left"></view>
+        <view class="corner bottom-right"></view>
+      </view>
+    </view>
+    
+    <!-- 顶部提示 -->
+    <view class="scan-tip">
+      <text>请将水果放入框内，保持清晰</text>
+    </view>
+  </view>
+
+  <!-- 识别模式选择 -->
+  <view class="mode-selection card">
+    <view class="mode-grid grid grid-cols-2 gap-20">
+      <button class="mode-btn {{currentMode === 'camera' ? 'active' : ''}} card flex flex-col items-center p-30" bindtap="selectMode" data-mode="camera">
+        <image class="mode-icon" src="/images/icon_camera.png" lazy-load="true"></image>
+        <text class="title mt-10">拍照识别</text>
+        <text class="subtitle mt-10">识别水果实物</text>
+      </button>
+      
+      <button class="mode-btn {{currentMode === 'barcode' ? 'active' : ''}} card flex flex-col items-center p-30" bindtap="selectMode" data-mode="barcode">
+        <image class="mode-icon" src="/images/icon_barcode.png" lazy-load="true"></image>
+        <text class="title mt-10">条形码识别</text>
+        <text class="subtitle mt-10">扫描商品标签</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 识别历史 -->
+  <view class="history-section card" wx:if="{{historyLoaded}}">
+    <view class="section-header flex justify-between items-center mb-30">
+      <text class="title">最近识别</text>
+      <text class="view-all text-success" bindtap="viewAllHistory">查看全部</text>
+    </view>
+    
+    <view class="history-list flex flex-col gap-20">
+      <view class="history-item flex items-center p-20 bg-gray-100 rounded-16" wx:for="{{historyList}}" wx:key="id" bindtap="viewHistoryDetail" data-id="{{item.id}}">
+        <image class="fruit-thumb" src="{{item.image}}" lazy-load="true"></image>
+        <view class="item-content flex-1 ml-20">
+          <text class="title">{{item.name}}</text>
+          <text class="subtitle">{{item.time}} · 甜度{{item.sweetness}}°</text>
+        </view>
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 历史记录骨架屏 -->
+  <view class="history-section card" wx:else>
+    <view class="section-header flex justify-between items-center mb-30">
+      <text class="title">最近识别</text>
+      <text class="view-all text-success">查看全部</text>
+    </view>
+    
+    <view class="history-list flex flex-col gap-20">
+      <view class="history-item flex items-center p-20 bg-gray-100 rounded-16">
+        <view class="fruit-thumb bg-gray-200"></view>
+        <view class="item-content flex-1 ml-20">
+          <view class="title bg-gray-200 h-32rpx w-120rpx mb-10"></view>
+          <view class="subtitle bg-gray-200 h-24rpx w-200rpx"></view>
+        </view>
+        <text class="arrow">></text>
+      </view>
+      <view class="history-item flex items-center p-20 bg-gray-100 rounded-16">
+        <view class="fruit-thumb bg-gray-200"></view>
+        <view class="item-content flex-1 ml-20">
+          <view class="title bg-gray-200 h-32rpx w-120rpx mb-10"></view>
+          <view class="subtitle bg-gray-200 h-24rpx w-200rpx"></view>
+        </view>
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 拍照按钮 -->
+  <view class="capture-section p-0-30-30">
+    <button class="capture-btn btn btn-large" bindtap="takePhoto">
+      <text class="icon-camera icon mr-10">&#128247;</text>
+      <text class="btn-text">立即拍照识别</text>
+    </button>
+  </view>
+</view>

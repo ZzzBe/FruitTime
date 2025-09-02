@@ -1,23 +1,60 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/homepage/homepage",
+    "pages/fruit-identify/fruit-identify",
+    "pages/fruit-result/fruit-result",
+    "pages/fruit-detail/fruit-detail",
+    "pages/fruit-compare/fruit-compare",
+    "pages/fruit-recommend/fruit-recommend"
   ],
-  "window": {
-    "navigationBarTextStyle": "black",
-    "navigationStyle": "custom"
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#10b981",
+    "navigationBarTitleText": "果时",
+    "navigationBarTextStyle":"white"
   },
-  "renderer": "skyline",
-  "rendererOptions": {
-    "skyline": {
-      "defaultDisplayBlock": true,
-      "defaultContentBox": true,
-      "tagNameStyleIsolation": "legacy",
-      "disableABTest": true,
-      "sdkVersionBegin": "3.0.0",
-      "sdkVersionEnd": "15.255.255"
-    }
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#10b981",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/homepage/homepage",
+        "iconPath": "images/icon_home.png",
+        "selectedIconPath": "images/icon_home_selected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/fruit-identify/fruit-identify",
+        "iconPath": "images/icon_camera.png",
+        "selectedIconPath": "images/icon_camera_selected.png",
+        "text": "果识"
+      },
+      {
+        "pagePath": "pages/fruit-compare/fruit-compare",
+        "iconPath": "images/icon_compare.png",
+        "selectedIconPath": "images/icon_compare_selected.png",
+        "text": "果知"
+      },
+      {
+        "pagePath": "pages/fruit-recommend/fruit-recommend",
+        "iconPath": "images/icon_recommend.png",
+        "selectedIconPath": "images/icon_recommend_selected.png",
+        "text": "果然"
+      }
+    ]
   },
-  "componentFramework": "glass-easel",
+  "usingComponents": {
+    "fruit-card": "/components/fruit-card/index"
+  },
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "resizable": true,
+  "preloadRule": {
+    "pages/homepage/homepage": {
+      "network": "all",
+      "packages": ["pages/fruit-identify/fruit-identify", "pages/fruit-compare/fruit-compare"]
+    }
+  }
 }

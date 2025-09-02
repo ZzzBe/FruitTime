@@ -1,0 +1,120 @@
+<view class="container">
+  <!-- 识别图片展示 -->
+  <view class="result-image relative rounded-24 overflow-hidden mb-30">
+    <image src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400&h=300&fit=crop" mode="aspectFill" class="w-100% h-400rpx block"></image>
+    <view class="status-tag absolute top-20 left-20 bg-green-500 color-white p-10-20 rounded-12 font-500 text-24">识别成功</view>
+  </view>
+
+  <!-- 识别结果卡片 -->
+  <view class="result-card card p-30 mb-30">
+    <view class="fruit-header flex justify-between items-start mb-30">
+      <view>
+        <text class="title">麒麟西瓜</text>
+        <text class="subtitle mt-10">甜度13° | 当季水果</text>
+      </view>
+      <view class="price-section text-right">
+        <text class="price text-40 font-bold color-green-500 block">¥3.99</text>
+        <text class="unit text-20 color-gray-500">/斤</text>
+      </view>
+    </view>
+
+    <!-- 关键信息 -->
+    <view class="key-info-grid flex justify-between mb-40">
+      <view class="info-item flex flex-col items-center">
+        <view class="info-icon w-60rpx h-60rpx rounded-50% flex items-center justify-center mb-10 bg-red-100 color-red-500">
+          <text class="icon-water icon text-32">&#128166;</text>
+        </view>
+        <text class="label text-20 color-gray-500 mb-5">水分</text>
+        <text class="value text-24 font-500 color-gray-800">92%</text>
+      </view>
+      <view class="info-item flex flex-col items-center">
+        <view class="info-icon w-60rpx h-60rpx rounded-50% flex items-center justify-center mb-10 bg-yellow-100 color-yellow-500">
+          <text class="icon-sweet icon text-32">&#127853;</text>
+        </view>
+        <text class="label text-20 color-gray-500 mb-5">甜度</text>
+        <text class="value text-24 font-500 color-gray-800">13°</text>
+      </view>
+      <view class="info-item flex flex-col items-center">
+        <view class="info-icon w-60rpx h-60rpx rounded-50% flex items-center justify-center mb-10 bg-green-100 color-green-500">
+          <text class="icon-leaf icon text-32">&#127809;</text>
+        </view>
+        <text class="label text-20 color-gray-500 mb-5">热量</text>
+        <text class="value text-24 font-500 color-gray-800">30kcal</text>
+      </view>
+    </view>
+
+    <!-- 营养成分 -->
+    <view class="nutrition-section mt-30">
+      <text class="title mb-20">营养成分</text>
+      
+      <view class="nutrition-item mb-20">
+        <view class="nutrition-header flex justify-between mb-10 text-24">
+          <text>维生素C</text>
+          <text>8.1mg</text>
+        </view>
+        <progress class="nutrition-bar h-12rpx rounded-6rpx" percent="65" activeColor="#10b981" />
+      </view>
+      
+      <view class="nutrition-item mt-20 mb-20">
+        <view class="nutrition-header flex justify-between mb-10 text-24">
+          <text>膳食纤维</text>
+          <text>0.4g</text>
+        </view>
+        <progress class="nutrition-bar h-12rpx rounded-6rpx" percent="40" activeColor="#10b981" />
+      </view>
+      
+      <view class="nutrition-item mt-20 mb-20">
+        <view class="nutrition-header flex justify-between mb-10 text-24">
+          <text>钾</text>
+          <text>112mg</text>
+        </view>
+        <progress class="nutrition-bar h-12rpx rounded-6rpx" percent="75" activeColor="#10b981" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 健康提示 -->
+  <view class="health-tip card p-30 mb-30 bg-blue-50">
+    <view class="tip-content flex">
+      <view class="tip-icon w-60rpx h-60rpx bg-blue-500 rounded-50% flex items-center justify-center mr-20">
+        <text class="icon-heart icon color-white text-32">&#10084;</text>
+      </view>
+      <view class="tip-text">
+        <text class="title">健康提示</text>
+        <text class="subtitle mt-10 block">西瓜含水量高，适合夏季补水，但糖尿病患者需控制摄入量。</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 相似品种 -->
+  <view class="similar-section card p-30 mb-30">
+    <text class="title">相似品种</text>
+    
+    <view class="similar-list mt-30 flex flex-col gap-20">
+      <view class="similar-item flex items-center p-20 bg-gray-100 rounded-16" wx:for="{{similarFruits}}" wx:key="id">
+        <image class="fruit-thumb w-80rpx h-80rpx rounded-12 mr-20" src="{{item.image}}"></image>
+        <view class="item-content flex-1">
+          <text class="title">{{item.name}}</text>
+          <text class="subtitle mt-10 block">{{item.description}}</text>
+          <text class="text-success mt-10 block">{{item.price}}</text>
+        </view>
+        <button class="compare-btn btn btn-secondary btn-small" bindtap="addToCompare" data-id="{{item.id}}">对比</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-section p-0-30-30">
+    <view class="action-grid flex gap-20 mb-20">
+      <button class="action-btn primary btn flex-1 items-center justify-center p-25 rounded-12 text-26" bindtap="addToCompare">
+        <text class="icon-plus icon text-28 mr-10">&#10133;</text>
+        <text class="btn-text">加入对比</text>
+      </button>
+      <button class="action-btn secondary btn flex-1 items-center justify-center p-25 rounded-12 text-26" bindtap="recommendToMe">
+        <text class="icon-heart icon text-28 mr-10">&#10084;</text>
+        <text class="btn-text">推荐给我</text>
+      </button>
+    </view>
+    <button class="view-detail-btn btn w-100% bg-gray-200 color-gray-700 border-none rounded-12 p-25 text-26" bindtap="viewDetail">查看详情</button>
+  </view>
+</view>

@@ -1,0 +1,184 @@
+<view class="container">
+  <!-- 顶部图片 -->
+  <view class="fruit-header relative rounded-24 overflow-hidden mb-30">
+    <image src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400&h=300&fit=crop" mode="aspectFill" class="w-100% h-400rpx block"></image>
+    <view class="header-overlay absolute bottom-0 left-0 right-0 bg-white-90 backdrop-blur-10rpx p-30">
+      <view class="fruit-info">
+        <text class="title text-36">麒麟西瓜</text>
+        <text class="subtitle mt-10 block">甜度13° · 当季水果 · 汁多味甜</text>
+        <view class="price-section mt-20 flex items-baseline">
+          <text class="price text-48 font-bold color-green-500">¥3.99</text>
+          <text class="unit text-24 color-gray-500 ml-10">/斤</text>
+          <view class="tags flex gap-10 ml-auto">
+            <text class="tag tag-season bg-green-100 color-green-800 p-5-15 rounded-12 text-20">当季</text>
+            <text class="tag tag-hot bg-red-100 color-red-800 p-5-15 rounded-12 text-20">热销</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="info-section card p-30 mb-30">
+    <text class="title mb-20">基本信息</text>
+    <view class="info-grid grid grid-cols-2 gap-20">
+      <view class="info-item flex flex-col">
+        <text class="label text-24 color-gray-500 mb-10">产地：</text>
+        <text class="value text-26 font-500 color-gray-800">海南</text>
+      </view>
+      <view class="info-item flex flex-col">
+        <text class="label text-24 color-gray-500 mb-10">季节：</text>
+        <text class="value text-26 font-500 color-gray-800">5-9月</text>
+      </view>
+      <view class="info-item flex flex-col">
+        <text class="label text-24 color-gray-500 mb-10">甜度：</text>
+        <text class="value text-26 font-500 color-gray-800">12-14°</text>
+      </view>
+      <view class="info-item flex flex-col">
+        <text class="label text-24 color-gray-500 mb-10">储存：</text>
+        <text class="value text-26 font-500 color-gray-800">常温3-5天</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 营养成分图表 -->
+  <view class="nutrition-section card p-30 mb-30">
+    <text class="title mb-30">营养成分</text>
+    <view class="nutrition-content flex items-center justify-around">
+      <view class="chart-container w-200rpx h-200rpx">
+        <!-- 简化的水分图表 -->
+        <view class="chart w-100% h-100% rounded-50% bg-conic-green-500-92-gray-200-8 flex items-center justify-center">
+          <view class="chart-inner w-140rpx h-140rpx rounded-50% bg-white flex flex-col items-center justify-center">
+            <text class="chart-value text-32 font-bold color-gray-800">92%</text>
+            <text class="chart-label text-20 color-gray-500">水分</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="chart-legend flex flex-col gap-20">
+        <view class="legend-item flex items-center text-24">
+          <view class="legend-color w-20rpx h-20rpx rounded-10 mr-10 bg-green-500"></view>
+          <text>水分 92%</text>
+        </view>
+        <view class="legend-item flex items-center text-24">
+          <view class="legend-color w-20rpx h-20rpx rounded-10 mr-10 bg-yellow-500"></view>
+          <text>碳水化合物 7.6%</text>
+        </view>
+        <view class="legend-item flex items-center text-24">
+          <view class="legend-color w-20rpx h-20rpx rounded-10 mr-10 bg-orange-500"></view>
+          <text>蛋白质 0.6%</text>
+        </view>
+        <view class="legend-item flex items-center text-24">
+          <view class="legend-color w-20rpx h-20rpx rounded-10 mr-10 bg-red-500"></view>
+          <text>脂肪 0.2%</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 详细营养数据 -->
+  <view class="nutrition-detail card p-30 mb-30">
+    <text class="title mb-20">营养详情 (每100g)</text>
+    <view class="nutrition-list flex flex-col">
+      <view class="nutrition-item flex justify-between p-15-0 border-b-gray-100">
+        <text class="label">热量</text>
+        <text class="value">30 kcal</text>
+      </view>
+      <view class="nutrition-item flex justify-between p-15-0 border-b-gray-100">
+        <text class="label">维生素C</text>
+        <text class="value">8.1 mg</text>
+      </view>
+      <view class="nutrition-item flex justify-between p-15-0 border-b-gray-100">
+        <text class="label">膳食纤维</text>
+        <text class="value">0.4 g</text>
+      </view>
+      <view class="nutrition-item flex justify-between p-15-0 border-b-gray-100">
+        <text class="label">钾</text>
+        <text class="value">112 mg</text>
+      </view>
+      <view class="nutrition-item flex justify-between p-15-0">
+        <text class="label">番茄红素</text>
+        <text class="value">4.5 mg</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 口感描述 -->
+  <view class="taste-section card p-30 mb-30">
+    <text class="title mb-20">口感特点</text>
+    <view class="tags-container flex flex-wrap gap-15 mb-20">
+      <text class="tag tag-green bg-green-100 color-green-800 p-5-15 rounded-12 text-20">汁多</text>
+      <text class="tag tag-red bg-red-100 color-red-800 p-5-15 rounded-12 text-20">味甜</text>
+      <text class="tag tag-yellow bg-yellow-100 color-yellow-800 p-5-15 rounded-12 text-20">脆嫩</text>
+      <text class="tag tag-purple bg-purple-100 color-purple-800 p-5-15 rounded-12 text-20">清爽</text>
+    </view>
+    <text class="description text-24 color-gray-500 leading-1.5">
+      麒麟西瓜果肉鲜红，质地脆嫩，汁水丰富，甜度高且分布均匀，
+      中心糖度可达13-14度，边缘也在10度以上，口感极佳。
+    </text>
+  </view>
+
+  <!-- 健康建议 -->
+  <view class="health-advice card p-30 mb-30 bg-gradient-blue-50-100">
+    <view class="section-header flex items-center">
+      <text class="icon-heart color-red-500 text-32">&#10084;</text>
+      <text class="title ml-10">健康建议</text>
+    </view>
+    <view class="advice-list mt-20 flex flex-col">
+      <view class="advice-item flex items-start">
+        <text class="icon-check color-green-500 text-28 mr-15">&#10003;</text>
+        <text class="advice-text text-24 color-blue-900 flex-1">夏季补水佳品，有助于预防中暑</text>
+      </view>
+      <view class="advice-item mt-10 flex items-start">
+        <text class="icon-warning color-yellow-500 text-28 mr-15">&#9888;</text>
+        <text class="advice-text text-24 color-blue-900 flex-1">糖尿病患者需控制摄入量</text>
+      </view>
+      <view class="advice-item mt-10 flex items-start">
+        <text class="icon-info color-blue-500 text-28 mr-15">&#8505;</text>
+        <text class="advice-text text-24 color-blue-900 flex-1">建议饭后1小时食用，避免空腹</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 购买建议 -->
+  <view class="buy-advice card p-30 mb-30">
+    <text class="title mb-20">如何挑选</text>
+    <view class="advice-steps flex flex-col">
+      <view class="step-item flex">
+        <view class="step-number w-40rpx h-40rpx bg-green-500 color-white rounded-50% flex items-center justify-center font-bold mr-20 flex-shrink-0">1</view>
+        <view class="step-content flex-1">
+          <text class="step-title font-500 color-gray-800 block mb-5">看纹路</text>
+          <text class="step-desc text-24 color-gray-500">纹路清晰、间距宽的更甜</text>
+        </view>
+      </view>
+      <view class="step-item mt-20 flex">
+        <view class="step-number w-40rpx h-40rpx bg-green-500 color-white rounded-50% flex items-center justify-center font-bold mr-20 flex-shrink-0">2</view>
+        <view class="step-content flex-1">
+          <text class="step-title font-500 color-gray-800 block mb-5">听声音</text>
+          <text class="step-desc text-24 color-gray-500">轻拍声音清脆表示成熟</text>
+        </view>
+      </view>
+      <view class="step-item mt-20 flex">
+        <view class="step-number w-40rpx h-40rpx bg-green-500 color-white rounded-50% flex items-center justify-center font-bold mr-20 flex-shrink-0">3</view>
+        <view class="step-content flex-1">
+          <text class="step-title font-500 color-gray-800 block mb-5">看瓜蒂</text>
+          <text class="step-desc text-24 color-gray-500">瓜蒂新鲜、弯曲的更甜</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="action-bar fixed bottom-0 left-0 right-0 p-20 bg-white border-t-gray-200">
+    <view class="action-grid flex gap-20">
+      <button class="action-btn primary btn flex-1 items-center justify-center p-25 rounded-12 text-26" bindtap="addToCompare">
+        <text class="icon-plus text-28 mr-10">&#10133;</text>
+        <text class="btn-text">加入对比</text>
+      </button>
+      <button class="action-btn secondary btn flex-1 items-center justify-center p-25 rounded-12 text-26" bindtap="recommendToMe">
+        <text class="icon-heart text-28 mr-10">&#10084;</text>
+        <text class="btn-text">推荐给我</text>
+      </button>
+    </view>
+  </view>
+</view>

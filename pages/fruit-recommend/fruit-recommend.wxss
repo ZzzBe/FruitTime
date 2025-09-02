@@ -1,0 +1,278 @@
+/* pages/recommend/index.wxss */
+.container {
+  padding: 20rpx;
+  background: #f9fafb;
+  min-height: 100vh;
+  padding-bottom: 30rpx;
+}
+
+.health-card {
+  padding: 30rpx;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  margin-bottom: 30rpx;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.edit-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 12rpx;
+  padding: 10rpx 20rpx;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+}
+
+.icon-edit {
+  font-size: 24rpx;
+  margin-right: 10rpx;
+}
+
+.health-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.health-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12rpx;
+  padding: 20rpx;
+}
+
+.item-icon {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15rpx;
+  flex-shrink: 0;
+}
+
+.bg-red {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+.bg-blue {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.bg-green {
+  background: rgba(34, 197, 94, 0.2);
+}
+
+.bg-purple {
+  background: rgba(139, 92, 246, 0.2);
+}
+
+.icon-heart, .icon-weight, .icon-allergy, .icon-taste {
+  font-size: 24rpx;
+}
+
+.item-content {
+  flex: 1;
+}
+
+.label {
+  font-size: 20rpx;
+  opacity: 0.8;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.value {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.tags-section {
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15rpx;
+}
+
+.tag {
+  padding: 10rpx 20rpx;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+}
+
+.tag-green {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.tag-blue {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.tag-purple {
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+
+.tag-yellow {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.tag-red {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.recommend-section {
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.recommend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.recommend-item {
+  display: flex;
+  padding: 20rpx;
+  background: #f9fafb;
+  border-radius: 16rpx;
+  position: relative;
+}
+
+.rank-badge {
+  position: absolute;
+  top: -10rpx;
+  left: -10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: #10b981;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 24rpx;
+}
+
+.fruit-image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 12rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  color: #fbbf24;
+  font-size: 24rpx;
+  margin-right: 5rpx;
+}
+
+.score {
+  font-size: 24rpx;
+  color: #667085;
+}
+
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #10b981;
+}
+
+.explanation {
+  padding: 30rpx;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  margin-bottom: 30rpx;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+}
+
+.icon-light {
+  color: #f59e0b;
+  font-size: 32rpx;
+}
+
+.explanation-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.explanation-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.icon-check {
+  color: #22c55e;
+  font-size: 28rpx;
+  margin-right: 15rpx;
+  flex-shrink: 0;
+}
+
+.explanation-text {
+  font-size: 24rpx;
+  color: #1e3a8a;
+  flex: 1;
+}
+
+.refresh-section {
+  padding: 0 30rpx;
+}
+
+.refresh-btn {
+  width: 100%;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-refresh {
+  font-size: 32rpx;
+  margin-right: 20rpx;
+}

@@ -1,10 +1,122 @@
 /**app.wxss**/
+
+/* 全局样式 */
 .container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
+  background: #f5f7fa;
+  min-height: 100vh;
+  padding: 20rpx;
+}
+
+/* 卡片样式 */
+.card {
+  background: white;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(140, 155, 184, 0.12);
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+/* 按钮样式 */
+.btn {
+  background: #0052d9;
+  color: white;
+  border: none;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-size: 26rpx;
+  text-align: center;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+.btn-secondary {
+  background: #f0f4ff;
+  color: #0052d9;
+}
+
+/* 文本样式 */
+.title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #182135;
+}
+
+.subtitle {
+  font-size: 24rpx;
+  color: #667085;
+}
+
+.text-small {
+  font-size: 20rpx;
+}
+
+.text-medium {
+  font-size: 24rpx;
+}
+
+.text-large {
+  font-size: 28rpx;
+}
+
+.text-bold {
+  font-weight: 500;
+}
+
+.text-primary {
+  color: #182135;
+}
+
+.text-secondary {
+  color: #667085;
+}
+
+.text-success {
+  color: #00b42a;
+}
+
+.text-warning {
+  color: #ff7d00;
+}
+
+.text-danger {
+  color: #f53f3f;
+}
+
+/* 间距 */
+.mt-10 {
+  margin-top: 20rpx;
+}
+
+.mt-20 {
+  margin-top: 40rpx;
+}
+
+.mb-10 {
+  margin-bottom: 20rpx;
+}
+
+.mb-20 {
+  margin-bottom: 40rpx;
+}
+
+.mr-10 {
+  margin-right: 20rpx;
+}
+
+.ml-10 {
+  margin-left: 20rpx;
+}
+
+.p-20 {
+  padding: 40rpx;
+}
+
+.pt-20 {
+  padding-top: 40rpx;
+}
+
+.pb-20 {
+  padding-bottom: 40rpx;
+}

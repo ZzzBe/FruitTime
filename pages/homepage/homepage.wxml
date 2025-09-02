@@ -1,0 +1,82 @@
+<!--pages/homepage/homepage.wxml-->
+
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="header card">
+    <text class="title">果时</text>
+    <text class="subtitle mt-10">最懂你的智能水果推荐</text>
+  </view>
+  
+  <!-- 搜索栏 -->
+  <view class="search-bar card">
+    <view class="search-input flex items-center">
+      <text class="icon-search icon">&#128269;</text>
+      <input 
+        class="input flex-1" 
+        placeholder="搜索水果名称..." 
+        bindinput="onSearchInput"
+        value="{{searchValue}}"
+      />
+      <button class="camera-btn btn btn-secondary ml-10" bindtap="navigateToIdentify">
+        <text class="icon-camera icon">&#128247;</text>
+      </button>
+    </view>
+  </view>
+  
+  <!-- 三个功能模块 -->
+  <view class="modules-container grid grid-cols-3 gap-20">
+    <view class="module-card card flex flex-col items-center p-20" bindtap="navigateToIdentify">
+      <image class="module-icon" src="/images/icon_camera.png" lazy-load="true"></image>
+      <text class="title mt-10">果识</text>
+      <text class="subtitle mt-10">拍照识别水果</text>
+    </view>
+    
+    <view class="module-card card flex flex-col items-center p-20" bindtap="navigateToCompare">
+      <image class="module-icon" src="/images/icon_compare.png" lazy-load="true"></image>
+      <text class="title mt-10">果知</text>
+      <text class="subtitle mt-10">品种对比分析</text>
+    </view>
+    
+    <view class="module-card card flex flex-col items-center p-20" bindtap="navigateToRecommend">
+      <image class="module-icon" src="/images/icon_recommend.png" lazy-load="true"></image>
+      <text class="title mt-10">果然</text>
+      <text class="subtitle mt-10">个性推荐</text>
+    </view>
+  </view>
+  
+  <!-- 今日推荐 -->
+  <view class="recommend-section card" wx:if="{{contentLoaded}}">
+    <view class="section-header mb-20">
+      <text class="title">今日推荐</text>
+    </view>
+    <view class="recommend-item" bindtap="viewFruitDetail">
+      <image class="fruit-image" src="{{recommendedFruit.image}}" lazy-load="true"></image>
+      <view class="item-content p-20">
+        <text class="title">{{recommendedFruit.name}}</text>
+        <text class="subtitle mt-10">{{recommendedFruit.description}}</text>
+        <view class="item-footer flex justify-between items-center mt-20">
+          <text class="text-success text-large">{{recommendedFruit.price}}</text>
+          <button class="btn btn-secondary btn-small">查看详情</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 骨架屏 -->
+  <view class="recommend-section card" wx:else>
+    <view class="section-header mb-20">
+      <text class="title">今日推荐</text>
+    </view>
+    <view class="recommend-item">
+      <view class="fruit-image bg-gray-200"></view>
+      <view class="item-content p-20">
+        <view class="title bg-gray-200 h-32rpx w-200rpx mb-20"></view>
+        <view class="subtitle bg-gray-200 h-24rpx w-300rpx mb-20"></view>
+        <view class="item-footer flex justify-between items-center mt-20">
+          <view class="bg-gray-200 h-32rpx w-120rpx"></view>
+          <view class="bg-gray-200 h-40rpx w-120rpx rounded-12"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
