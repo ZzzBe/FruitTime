@@ -9,6 +9,7 @@
   "author": "boki",
   "license": "ISC",
   "dependencies": {
+    "canvas": "^3.2.0",
     "tdesign-miniprogram": "^1.10.1"
   }
 }
