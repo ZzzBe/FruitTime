@@ -1,13 +1,19 @@
-/* pages/fruit-compare/index.wxss */
+/* pages/fruit-compare/fruit-compare.wxss */
 .container {
   padding: 20rpx;
   background: #f9fafb;
   min-height: 100vh;
 }
 
+.card {
+  background: white;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 30rpx;
+}
+
 .comparison-list {
   padding: 20rpx;
-  margin-bottom: 30rpx;
 }
 
 .scroll-container {
@@ -100,11 +106,32 @@
   color: #667085;
 }
 
+/* 对比维度切换 */
+.dimension-tabs {
+  display: flex;
+  padding: 10rpx;
+  background: white;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 10rpx;
+  font-size: 24rpx;
+  color: #667085;
+  border-radius: 12rpx;
+}
+
+.tab-item.active {
+  background: #10b981;
+  color: white;
+  font-weight: 500;
+}
+
 .recommend-summary {
   padding: 30rpx;
   background: linear-gradient(135deg, #10b981, #3b82f6);
   color: white;
-  margin-bottom: 30rpx;
 }
 
 .summary-text {
@@ -119,7 +146,6 @@
 
 .comparison-table {
   padding: 0;
-  margin-bottom: 30rpx;
   overflow: hidden;
 }
 
@@ -210,61 +236,94 @@
   color: #667085;
 }
 
+/* 可视化图表 */
 .visualization {
   padding: 30rpx;
-}
-
-.chart-section {
-  display: flex;
-  flex-direction: column;
 }
 
 .chart-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20rpx;
+  align-items: center;
+  margin-bottom: 30rpx;
 }
 
-.label {
+.title {
+  font-size: 28rpx;
   font-weight: 500;
   color: #182135;
 }
 
-.desc {
-  font-size: 20rpx;
-  color: #667085;
+.export-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8rpx;
+  padding: 10rpx 20rpx;
+  font-size: 24rpx;
 }
 
-.chart-bars {
+.chart-canvas {
+  width: 100%;
+  height: 400rpx;
+}
+
+.skeleton-chart {
+  height: 400rpx;
+  background: #f3f4f6;
+  border-radius: 12rpx;
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* 空状态 */
+.empty-state {
   display: flex;
   flex-direction: column;
-  gap: 20rpx;
-}
-
-.bar-item {
-  display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 100rpx 20rpx;
+  text-align: center;
 }
 
-.bar-label {
+.empty-icon {
   width: 120rpx;
-  font-size: 24rpx;
-  color: #182135;
+  height: 120rpx;
+  margin-bottom: 30rpx;
+  opacity: 0.5;
 }
 
-.bar-container {
-  flex: 1;
-  margin: 0 20rpx;
+.empty-text {
+  font-size: 28rpx;
+  color: #667085;
+  margin-bottom: 40rpx;
 }
 
-.bar {
-  height: 12rpx;
-  border-radius: 6rpx;
+.add-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 12rpx;
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
 }
 
-.bar-value {
-  width: 100rpx;
-  text-align: right;
-  font-size: 24rpx;
-  color: #182135;
+/* 通用间距类 */
+.mb-30 {
+  margin-bottom: 30rpx;
+}
+
+.mt-20 {
+  margin-top: 20rpx;
 }

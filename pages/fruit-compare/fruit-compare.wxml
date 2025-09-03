@@ -24,18 +24,35 @@
     </scroll-view>
   </view>
 
+  <!-- 对比维度切换 -->
+  <view class="dimension-tabs card mb-30">
+    <view class="tab-item {{activeDimension === 'basic' ? 'active' : ''}}" data-dimension="basic" bindtap="switchDimension">
+      基础信息
+    </view>
+    <view class="tab-item {{activeDimension === 'nutrition' ? 'active' : ''}}" data-dimension="nutrition" bindtap="switchDimension">
+      营养成分
+    </view>
+    <view class="tab-item {{activeDimension === 'price' ? 'active' : ''}}" data-dimension="price" bindtap="switchDimension">
+      价格趋势
+    </view>
+    <view class="tab-item {{activeDimension === 'taste' ? 'active' : ''}}" data-dimension="taste" bindtap="switchDimension">
+      口感特征
+    </view>
+    <view class="tab-item {{activeDimension === 'sugar' ? 'active' : ''}}" data-dimension="sugar" bindtap="switchDimension">
+      糖酸度
+    </view>
+  </view>
+
   <!-- 对比结果总结 -->
-  <view class="recommend-summary card">
+  <view class="recommend-summary card" wx:if="{{recommendation}}">
     <text class="title">智能推荐</text>
     <text class="summary-text mt-20">
-      根据您的健康档案，推荐选择
-      <text class="highlight">麒麟西瓜</text>：
-      价格适中，甜度高，适合日常补水需求。
+      {{recommendation.reason}}
     </text>
   </view>
 
-  <!-- 详细对比表格 -->
-  <view class="comparison-table card">
+  <!-- 基础信息对比 -->
+  <view class="comparison-table card" wx:if="{{activeDimension === 'basic'}}">
     <!-- 表头 -->
     <view class="table-header">
       <view class="header-cell"></view>
@@ -103,71 +120,52 @@
     </view>
   </view>
 
-  <!-- 可视化对比 -->
-  <view class="visualization card" wx:if="{{chartsLoaded}}">
-    <text class="title mb-30">营养对比可视化</text>
-    
-    <!-- 价格对比条 -->
-    <view class="chart-section mb-40">
-      <view class="chart-header">
-        <text class="label">价格对比</text>
-        <text class="desc">越低越好</text>
-      </view>
-      <view class="chart-bars">
-        <view class="bar-item" wx:for="{{priceBars}}" wx:key="index">
-          <text class="bar-label">{{item.label}}</text>
-          <view class="bar-container">
-            <progress class="bar" percent="{{item.percent}}" activeColor="{{item.color}}" />
-          </view>
-          <text class="bar-value">{{item.value}}</text>
-        </view>
-      </view>
+  <!-- 营养成分可视化 -->
+  <view class="visualization card" wx:if="{{activeDimension === 'nutrition' && nutritionData && chartsLoaded}}">
+    <view class="chart-header">
+      <text class="title">营养成分对比（雷达图）</text>
+      <button class="export-btn" bindtap="exportChart" data-type="radar">导出图片</button>
     </view>
-    
-    <!-- 甜度对比条 -->
-    <view class="chart-section">
-      <view class="chart-header">
-        <text class="label">甜度对比</text>
-        <text class="desc">越高越好</text>
-      </view>
-      <view class="chart-bars">
-        <view class="bar-item" wx:for="{{sweetnessBars}}" wx:key="index">
-          <text class="bar-label">{{item.label}}</text>
-          <view class="bar-container">
-            <progress class="bar" percent="{{item.percent}}" activeColor="{{item.color}}" />
-          </view>
-          <text class="bar-value">{{item.value}}</text>
-        </view>
-      </view>
+    <canvas class="chart-canvas" id="radarChart" canvas-id="radarChart"></canvas>
+  </view>
+  
+  <!-- 价格趋势可视化 -->
+  <view class="visualization card" wx:if="{{activeDimension === 'price' && priceData && chartsLoaded}}">
+    <view class="chart-header">
+      <text class="title">价格趋势对比（折线图）</text>
+      <button class="export-btn" bindtap="exportChart" data-type="line">导出图片</button>
     </view>
+    <canvas class="chart-canvas" id="lineChart" canvas-id="lineChart"></canvas>
+  </view>
+  
+  <!-- 口感特征可视化 -->
+  <view class="visualization card" wx:if="{{activeDimension === 'taste' && tasteData && chartsLoaded}}">
+    <view class="chart-header">
+      <text class="title">口感特征对比（标签云）</text>
+      <button class="export-btn" bindtap="exportChart" data-type="tagcloud">导出图片</button>
+    </view>
+    <canvas class="chart-canvas" id="tagCloud" canvas-id="tagCloud"></canvas>
+  </view>
+  
+  <!-- 糖酸度可视化 -->
+  <view class="visualization card" wx:if="{{activeDimension === 'sugar' && sugarData && chartsLoaded}}">
+    <view class="chart-header">
+      <text class="title">糖酸度对比（柱状图）</text>
+      <button class="export-btn" bindtap="exportChart" data-type="bar">导出图片</button>
+    </view>
+    <canvas class="chart-canvas" id="barChart" canvas-id="barChart"></canvas>
   </view>
   
   <!-- 图表骨架屏 -->
-  <view class="visualization card" wx:else>
-    <text class="title mb-30">营养对比可视化</text>
-    
-    <!-- 价格对比条骨架屏 -->
-    <view class="chart-section mb-40">
-      <view class="chart-header">
-        <text class="label">价格对比</text>
-        <text class="desc">越低越好</text>
-      </view>
-      <view class="chart-bars">
-        <view class="bar-item">
-          <text class="bar-label bg-gray-200 h-24rpx w-80rpx"></text>
-          <view class="bar-container">
-            <view class="bar bg-gray-200 h-12rpx rounded-6rpx"></view>
-          </view>
-          <text class="bar-value bg-gray-200 h-24rpx w-60rpx"></text>
-        </view>
-        <view class="bar-item">
-          <text class="bar-label bg-gray-200 h-24rpx w-80rpx"></text>
-          <view class="bar-container">
-            <view class="bar bg-gray-200 h-12rpx rounded-6rpx"></view>
-          </view>
-          <text class="bar-value bg-gray-200 h-24rpx w-60rpx"></text>
-        </view>
-      </view>
-    </view>
+  <view class="visualization card" wx:if="{{loading && activeDimension !== 'basic'}}">
+    <text class="title mb-30">数据加载中...</text>
+    <view class="skeleton-chart"></view>
+  </view>
+  
+  <!-- 空状态 -->
+  <view class="empty-state card" wx:if="{{comparisonFruits.length === 0}}">
+    <image class="empty-icon" src="/images/icon_empty.png"></image>
+    <text class="empty-text">暂无对比数据</text>
+    <button class="add-btn" bindtap="addMoreFruits">添加水果</button>
   </view>
 </view>

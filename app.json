@@ -5,7 +5,8 @@
     "pages/fruit-result/fruit-result",
     "pages/fruit-detail/fruit-detail",
     "pages/fruit-compare/fruit-compare",
-    "pages/fruit-recommend/fruit-recommend"
+    "pages/fruit-recommend/fruit-recommend",
+    "pages/chart-test/chart-test"
   ],
   "window":{
     "backgroundTextStyle":"light",

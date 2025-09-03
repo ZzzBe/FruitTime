@@ -1,0 +1,34 @@
+<!-- pages/chart-test/chart-test.wxml -->
+<view class="container">
+  <view class="section">
+    <view class="header">
+      <text class="title">雷达图示例</text>
+      <button class="export-btn" bindtap="exportChart" data-type="radar">导出图片</button>
+    </view>
+    <canvas class="chart-canvas" id="radarChart" canvas-id="radarChart"></canvas>
+  </view>
+  
+  <view class="section">
+    <view class="header">
+      <text class="title">折线图示例</text>
+      <button class="export-btn" bindtap="exportChart" data-type="line">导出图片</button>
+    </view>
+    <canvas class="chart-canvas" id="lineChart" canvas-id="lineChart"></canvas>
+  </view>
+  
+  <view class="section">
+    <view class="header">
+      <text class="title">柱状图示例</text>
+      <button class="export-btn" bindtap="exportChart" data-type="bar">导出图片</button>
+    </view>
+    <canvas class="chart-canvas" id="barChart" canvas-id="barChart"></canvas>
+  </view>
+  
+  <view class="section">
+    <view class="header">
+      <text class="title">标签云示例</text>
+      <button class="export-btn" bindtap="exportChart" data-type="tagcloud">导出图片</button>
+    </view>
+    <canvas class="chart-canvas" id="tagCloud" canvas-id="tagCloud"></canvas>
+  </view>
+</view>
