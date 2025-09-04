@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>果然 - 个性化推荐</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .iphone-frame {
+            width: 393px;
+            height: 852px;
+            border-radius: 47px;
+            background: #000;
+            padding: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 37px;
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        .status-bar {
+            height: 47px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            color: #000;
+            font-size: 14px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .content-area {
+            height: calc(100% - 47px);
+            overflow-y: auto;
+            background: #f9fafb;
+        }
+        .health-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .recommendation-card {
+            transition: all 0.3s ease;
+        }
+        .recommendation-card:hover {
+            transform: translateY(-2px);
+        }
+        .tag {
+            transition: all 0.2s ease;
+        }
+        .tag:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-8">
+    <div class="iphone-frame">
+        <div class="iphone-screen">
+            <!-- 状态栏 -->
+            <div class="status-bar">
+                <button class="text-gray-600">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <span class="font-medium">个性化推荐</span>
+                <button class="text-gray-600">
+                    <i class="fas fa-sliders-h"></i>
+                </button>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 健康档案卡片 -->
+                <div class="p-4">
+                    <div class="health-card rounded-2xl p-4 text-white">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold">我的健康档案</h3>
+                            <button class="text-white text-sm opacity-80">
+                                <i class="fas fa-edit mr-1"></i>编辑
+                            </button>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-heartbeat"></i>
+                                    <span>血糖水平</span>
+                                </div>
+                                <p class="text-lg font-bold mt-1">正常</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-weight"></i>
+                                    <span>体重管理</span>
+                                </div>
+                                <p class="text-lg font-bold mt-1">减脂期</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-allergies"></i>
+                                    <span>过敏史</span>
+                                </div>
+                                <p class="text-lg font-bold mt-1">无</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>口味偏好</span>
+                                </div>
+                                <p class="text-lg font-bold mt-1">偏甜</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 推荐标签 -->
+                <div class="px-4 mb-4">
+                    <h3 class="font-semibold text-gray-800 mb-3">推荐标签</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">低热量</span>
+                        <span class="tag bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">高水分</span>
+                        <span class="tag bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">当季水果</span>
+                        <span class="tag bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm">减脂友好</span>
+                        <span class="tag bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">维C丰富</span>
+                    </div>
+                </div>
+
+                <!-- 今日推荐 -->
+                <div class="px-4 mb-4">
+                    <h3 class="font-semibold text-gray-800 mb-3">今日推荐</h3>
+                    
+                    <!-- 推荐水果列表 -->
+                    <div class="space-y-3">
+                        <!-- 第1推荐 -->
+                        <div class="recommendation-card bg-white rounded-2xl p-4 shadow-sm">
+                            <div class="flex items-start space-x-3">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=80&h=80&fit=crop" 
+                                         alt="麒麟西瓜" class="w-16 h-16 rounded-lg object-cover">
+                                    <div class="absolute -top-1 -right-1 bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">1</div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-semibold text-gray-800">麒麟西瓜</h4>
+                                        <div class="flex items-center space-x-1">
+                                            <span class="text-yellow-500">★</span>
+                                            <span class="text-sm text-gray-600">4.8</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mt-1">减脂期首选，低热量高水分</p>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-green-600 font-bold">¥3.99/斤</span>
+                                        <div class="flex space-x-1">
+                                            <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">低热量</span>
+                                            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">高水分</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 第2推荐 -->
+                        <div class="recommendation-card bg-white rounded-2xl p-4 shadow-sm">
+                            <div class="flex items-start space-x-3">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1528821128474-27f963b062bf?w=80&h=80&fit=crop" 
+                                         alt="草莓" class="w-16 h-16 rounded-lg object-cover">
+                                    <div class="absolute -top-1 -right-1 bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">2</div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-semibold text-gray-800">红颜草莓</h4>
+                                        <div class="flex items-center space-x-1">
+                                            <span class="text-yellow-500">★</span>
+                                            <span class="text-sm text-gray-600">4.7</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mt-1">维C丰富，抗氧化</p>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-green-600 font-bold">¥15.8/盒</span>
+                                        <div class="flex space-x-1">
+                                            <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs">维C高</span>
+                                            <span class="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs">抗氧化</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 第3推荐 -->
+                        <div class="recommendation-card bg-white rounded-2xl p-4 shadow-sm">
+                            <div class="flex items-start space-x-3">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=80&h=80&fit=crop" 
+                                         alt="橙子" class="w-16 h-16 rounded-lg object-cover">
+                                    <div class="absolute -top-1 -right-1 bg-purple-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">3</div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-semibold text-gray-800">赣南脐橙</h4>
+                                        <div class="flex items-center space-x-1">
+                                            <span class="text-yellow-500">★</span>
+                                            <span class="text-sm text-gray-600">4.6</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mt-1">膳食纤维丰富，助消化</p>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-green-600 font-bold">¥4.5/斤</span>
+                                        <div class="flex space-x-1">
+                                            <span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xs">膳食纤维</span>
+                                            <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded text-xs">助消化</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 第4推荐 -->
+                        <div class="recommendation-card bg-white rounded-2xl p-4 shadow-sm">
+                            <div class="flex items-start space-x-3">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1587132137056-bfbf0166836e?w=80&h=80&fit=crop" 
+                                         alt="蓝莓" class="w-16 h-16 rounded-lg object-cover">
+                                    <div class="absolute -top-1 -right-1 bg-indigo-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">4</div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-semibold text-gray-800">智利蓝莓</h4>
+                                        <div class="flex items-center space-x-1">
+                                            <span class="text-yellow-500">★</span>
+                                            <span class="text-sm text-gray-600">4.9</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mt-1">抗氧化之王，护眼佳品</p>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-green-600 font-bold">¥12.9/盒</span>
+                                        <div class="flex space-x-1">
+                                            <span class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded text-xs">抗氧化</span>
+                                            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">护眼</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 第5推荐 -->
+                        <div class="recommendation-card bg-white rounded-2xl p-4 shadow-sm">
+                            <div class="flex items-start space-x-3">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=80&h=80&fit=crop" 
+                                         alt="芒果" class="w-16 h-16 rounded-lg object-cover">
+                                    <div class="absolute -top-1 -right-1 bg-pink-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">5</div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-semibold text-gray-800">台农芒果</h4>
+                                        <div class="flex items-center space-x-1">
+                                            <span class="text-yellow-500">★</span>
+                                            <span class="text-sm text-gray-600">4.5</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mt-1">香甜可口，适量食用</p>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-green-600 font-bold">¥8.5/斤</span>
+                                        <div class="flex space-x-1">
+                                            <span class="bg-pink-100 text-pink-700 px-2 py-0.5 rounded text-xs">香甜</span>
+                                            <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded text-xs">适量</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 推荐说明 -->
+                <div class="px-4 pb-4">
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-4">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                            推荐说明
+                        </h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-green-500 mt-0.5"></i>
+                                <span class="text-gray-700">基于您的减脂需求，优先推荐低热量水果</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-green-500 mt-0.5"></i>
+                                <span class="text-gray-700">考虑您的口味偏好，选择甜度适中的品种</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-green-500 mt-0.5"></i>
+                                <span class="text-gray-700">当季水果，营养价值和口感更佳</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 底部提示 -->
+                <div class="px-4 pb-8">
+                    <button class="w-full bg-green-500 text-white py-4 rounded-full font-medium shadow-lg">
+                        <i class="fas fa-sync-alt mr-2"></i>
+                        重新生成推荐
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

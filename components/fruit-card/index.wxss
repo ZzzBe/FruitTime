@@ -1,0 +1,81 @@
+/* components/fruit-card/index.wxss */
+.fruit-card {
+  background: white;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.fruit-image {
+  width: 100%;
+  height: 240rpx;
+  display: block;
+}
+
+.card-content {
+  padding: 20rpx;
+}
+
+.fruit-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #182135;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.fruit-desc {
+  font-size: 24rpx;
+  color: #667085;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.stars {
+  margin-right: 10rpx;
+}
+
+.star {
+  color: #d1d5db;
+  font-size: 24rpx;
+}
+
+.star.filled {
+  color: #fbbf24;
+}
+
+.rating-text {
+  font-size: 20rpx;
+  color: #667085;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-bottom: 15rpx;
+}
+
+.tag {
+  padding: 5rpx 10rpx;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fruit-price {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #10b981;
+}

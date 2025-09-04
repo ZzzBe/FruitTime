@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>果识 - 首页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .iphone-frame {
+            width: 393px;
+            height: 852px;
+            border-radius: 47px;
+            background: #000;
+            padding: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 37px;
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        .status-bar {
+            height: 47px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            color: white;
+            font-size: 14px;
+        }
+        .content-area {
+            height: calc(100% - 47px - 83px);
+            overflow-y: auto;
+        }
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 83px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-8">
+    <div class="iphone-frame">
+        <div class="iphone-screen">
+            <!-- 状态栏 -->
+            <div class="status-bar">
+                <span>9:41</span>
+                <div class="flex items-center space-x-1">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-full"></i>
+                </div>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 顶部标题 -->
+                <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-6">
+                    <h1 class="text-2xl font-bold mb-2">果识</h1>
+                    <p class="text-green-100 text-sm">拍照识水果，健康吃出来</p>
+                </div>
+
+                <!-- 搜索栏 -->
+                <div class="p-4">
+                    <div class="relative">
+                        <input type="text" placeholder="搜索水果名称..." 
+                               class="w-full pl-12 pr-4 py-3 bg-gray-50 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-green-500 text-white p-2 rounded-full">
+                            <i class="fas fa-camera text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 快捷入口 -->
+                <div class="px-4 pb-4">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-gradient-to-br from-green-400 to-green-500 rounded-2xl p-4 text-white text-center shadow-lg">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-camera text-xl"></i>
+                            </div>
+                            <p class="text-sm font-medium">果识</p>
+                            <p class="text-xs opacity-80 mt-1">拍照识别</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-blue-400 to-blue-500 rounded-2xl p-4 text-white text-center shadow-lg">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-info-circle text-xl"></i>
+                            </div>
+                            <p class="text-sm font-medium">果知</p>
+                            <p class="text-xs opacity-80 mt-1">水果百科</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-purple-400 to-purple-500 rounded-2xl p-4 text-white text-center shadow-lg">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-heart text-xl"></i>
+                            </div>
+                            <p class="text-sm font-medium">果然</p>
+                            <p class="text-xs opacity-80 mt-1">个性推荐</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 今日推荐 -->
+                <div class="px-4 pb-4">
+                    <h3 class="text-lg font-semibold mb-3">今日推荐</h3>
+                    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400&h=200&fit=crop" 
+                             alt="今日推荐水果" class="w-full h-32 object-cover">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">麒麟西瓜</h4>
+                            <p class="text-sm text-gray-600 mt-1">甜度高达13°，汁多味甜</p>
+                            <div class="flex items-center justify-between mt-3">
+                                <span class="text-green-600 font-semibold">¥3.99/斤</span>
+                                <button class="bg-green-500 text-white px-3 py-1 rounded-full text-xs">
+                                    查看详情
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 热门水果 -->
+                <div class="px-4 pb-4">
+                    <h3 class="text-lg font-semibold mb-3">热门水果</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1528821128474-27f963b062bf?w=200&h=150&fit=crop" 
+                                 alt="草莓" class="w-full h-24 object-cover">
+                            <div class="p-3">
+                                <h4 class="font-medium text-sm">草莓</h4>
+                                <p class="text-xs text-gray-500">当季新鲜</p>
+                                <p class="text-green-600 font-semibold text-sm mt-1">¥15.8/盒</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=150&fit=crop" 
+                                 alt="芒果" class="w-full h-24 object-cover">
+                            <div class="p-3">
+                                <h4 class="font-medium text-sm">芒果</h4>
+                                <p class="text-xs text-gray-500">香甜可口</p>
+                                <p class="text-green-600 font-semibold text-sm mt-1">¥8.5/斤</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1587132137056-bfbf0166836e?w=200&h=150&fit=crop" 
+                                 alt="蓝莓" class="w-full h-24 object-cover">
+                            <div class="p-3">
+                                <h4 class="font-medium text-sm">蓝莓</h4>
+                                <p class="text-xs text-gray-500">抗氧化</p>
+                                <p class="text-green-600 font-semibold text-sm mt-1">¥12.9/盒</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=200&h=150&fit=crop" 
+                                 alt="橙子" class="w-full h-24 object-cover">
+                            <div class="p-3">
+                                <h4 class="font-medium text-sm">橙子</h4>
+                                <p class="text-xs text-gray-500">维C丰富</p>
+                                <p class="text-green-600 font-semibold text-sm mt-1">¥4.5/斤</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部导航 -->
+            <div class="bottom-nav">
+                <button class="flex flex-col items-center text-green-600">
+                    <i class="fas fa-home text-xl mb-1"></i>
+                    <span class="text-xs">首页</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-400">
+                    <i class="fas fa-camera text-xl mb-1"></i>
+                    <span class="text-xs">果识</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-400">
+                    <i class="fas fa-info-circle text-xl mb-1"></i>
+                    <span class="text-xs">果知</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-400">
+                    <i class="fas fa-heart text-xl mb-1"></i>
+                    <span class="text-xs">果然</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-400">
+                    <i class="fas fa-user text-xl mb-1"></i>
+                    <span class="text-xs">我的</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

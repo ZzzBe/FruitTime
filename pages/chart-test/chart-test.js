@@ -1,5 +1,6 @@
 // pages/chart-test/chart-test.js
-const { ChartRenderer, TagCloud } = require('../../utils/chart.js');
+const { ChartRenderer, TagCloud } = require('../../utils/chart/chart.js');
+const { showToast } = require('../../utils/index.js');
 
 Page({
   data: {
@@ -19,16 +20,16 @@ Page({
   async initCharts() {
     // 初始化雷达图
     this.radarChart = new ChartRenderer('radarChart');
-    
+
     // 初始化折线图
     this.lineChart = new ChartRenderer('lineChart');
-    
+
     // 初始化柱状图
     this.barChart = new ChartRenderer('barChart');
-    
+
     // 初始化标签云
     this.tagCloud = new TagCloud('tagCloud');
-    
+
     // 渲染示例图表
     setTimeout(() => {
       this.renderSampleCharts();
@@ -39,13 +40,13 @@ Page({
   async renderSampleCharts() {
     // 渲染雷达图
     await this.renderSampleRadarChart();
-    
+
     // 渲染折线图
     await this.renderSampleLineChart();
-    
+
     // 渲染柱状图
     await this.renderSampleBarChart();
-    
+
     // 渲染标签云
     await this.renderSampleTagCloud();
   },
@@ -53,9 +54,9 @@ Page({
   // 渲染示例雷达图
   async renderSampleRadarChart() {
     if (!this.radarChart) return;
-    
+
     await this.radarChart.init();
-    
+
     const data = {
       labels: ['热量', '糖分', '膳食纤维', '维生素C', '钾'],
       datasets: [
@@ -69,7 +70,7 @@ Page({
         }
       ]
     };
-    
+
     this.radarChart.drawRadarChart(data, {
       title: '营养成分对比（示例）'
     });
@@ -78,9 +79,9 @@ Page({
   // 渲染示例折线图
   async renderSampleLineChart() {
     if (!this.lineChart) return;
-    
+
     await this.lineChart.init();
-    
+
     const data = {
       labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
       datasets: [
@@ -94,7 +95,7 @@ Page({
         }
       ]
     };
-    
+
     this.lineChart.drawLineChart(data, {
       title: '价格趋势对比（示例）'
     });
@@ -103,9 +104,9 @@ Page({
   // 渲染示例柱状图
   async renderSampleBarChart() {
     if (!this.barChart) return;
-    
+
     await this.barChart.init();
-    
+
     const data = {
       labels: ['苹果', '香蕉', '橙子', '葡萄'],
       datasets: [
@@ -119,7 +120,7 @@ Page({
         }
       ]
     };
-    
+
     this.barChart.drawBarChart(data, {
       title: '糖酸度对比（示例）'
     });
@@ -128,9 +129,9 @@ Page({
   // 渲染示例标签云
   async renderSampleTagCloud() {
     if (!this.tagCloud) return;
-    
+
     await this.tagCloud.init();
-    
+
     const tags = [
       { text: '苹果-甜', count: 8 },
       { text: '苹果-脆', count: 7 },
@@ -145,7 +146,7 @@ Page({
       { text: '葡萄-多汁', count: 8 },
       { text: '葡萄-脆', count: 6 }
     ];
-    
+
     this.tagCloud.drawTagCloud(tags, {
       title: '口感特征对比（示例）'
     });
@@ -156,34 +157,34 @@ Page({
     const type = e.currentTarget.dataset.type;
     let chartInstance;
     let tempFilePath;
-    
+
     try {
       switch (type) {
-        case 'radar':
-          chartInstance = this.radarChart;
-          break;
-        case 'line':
-          chartInstance = this.lineChart;
-          break;
-        case 'bar':
-          chartInstance = this.barChart;
-          break;
-        case 'tagcloud':
-          chartInstance = this.tagCloud;
-          break;
-        default:
-          wx.showToast({ title: '不支持的图表类型' });
-          return;
+      case 'radar':
+        chartInstance = this.radarChart;
+        break;
+      case 'line':
+        chartInstance = this.lineChart;
+        break;
+      case 'bar':
+        chartInstance = this.barChart;
+        break;
+      case 'tagcloud':
+        chartInstance = this.tagCloud;
+        break;
+      default:
+        wx.showToast({ title: '不支持的图表类型' });
+        return;
       }
-      
+
       if (!chartInstance) {
         wx.showToast({ title: '图表未初始化' });
         return;
       }
-      
+
       // 保存图表为图片
       tempFilePath = await chartInstance.saveChart();
-      
+
       // 保存到相册
       wx.saveImageToPhotosAlbum({
         filePath: tempFilePath,

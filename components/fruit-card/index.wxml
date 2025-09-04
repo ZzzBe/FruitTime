@@ -1,0 +1,29 @@
+<view class="fruit-card" bindtap="onTap">
+  <image class="fruit-image" src="{{image}}" mode="aspectFill"></image>
+  <view class="card-content">
+    <text class="fruit-name">{{name}}</text>
+    <text class="fruit-desc">{{description}}</text>
+    
+    <!-- 评分显示 -->
+    <view class="rating-container" wx:if="{{showRating}}">
+      <view class="stars">
+        <text class="star {{rating >= 1 ? 'filled' : ''}}">&#9733;</text>
+        <text class="star {{rating >= 2 ? 'filled' : ''}}">&#9733;</text>
+        <text class="star {{rating >= 3 ? 'filled' : ''}}">&#9733;</text>
+        <text class="star {{rating >= 4 ? 'filled' : ''}}">&#9733;</text>
+        <text class="star {{rating >= 5 ? 'filled' : ''}}">&#9733;</text>
+      </view>
+      <text class="rating-text">{{rating}}分</text>
+    </view>
+    
+    <!-- 标签显示 -->
+    <view class="tags-container" wx:if="{{showTags}}">
+      <text class="tag {{item.class}}" wx:for="{{tags}}" wx:key="index">{{item.text}}</text>
+    </view>
+    
+    <view class="card-footer">
+      <text class="fruit-price">{{price}}</text>
+      <slot name="action"></slot>
+    </view>
+  </view>
+</view>

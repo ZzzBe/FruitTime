@@ -4,7 +4,19 @@
 console.log('开始性能测试...');
 
 // 测试缓存机制
-const api = require('../utils/api.js');
+const { 
+  getFruitDetail,
+  getFruitComparison,
+  getRecommendations,
+  searchFruits,
+  getIdentifyHistory,
+  identifyImage,
+  getUserHealthData,
+  updateUserHealthData,
+  getUserFavorites,
+  addFavorite,
+  removeFavorite
+} = require('../utils/network/api.js');
 
 console.log('测试API缓存机制...');
 
@@ -28,7 +40,34 @@ api.getFruitDetail(1)
   });
 
 // 测试网络检查
-const util = require('../utils/util.js');
+const { 
+  showToast, 
+  showModal,
+  showLoading,
+  hideLoading,
+  formatPrice,
+  formatRating,
+  formatRelativeTime,
+  formatTime,
+  formatFileSize,
+  debounce,
+  throttle,
+  deepClone,
+  isEmptyObject,
+  uniqueArray,
+  querySelector,
+  querySelectorAll,
+  checkNetwork,
+  getSystemInfo,
+  getDeviceInfo,
+  isIPhoneX,
+  getRandomColor,
+  generateGradientColors,
+  validatePhone,
+  validateEmail,
+  getUrlParams,
+  generateId
+} = require('../utils/index.js');
 
 console.log('测试网络检查...');
 util.checkNetwork()

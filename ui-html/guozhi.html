@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>果知 - 麒麟西瓜详情</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .iphone-frame {
+            width: 393px;
+            height: 852px;
+            border-radius: 47px;
+            background: #000;
+            padding: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 37px;
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        .status-bar {
+            height: 47px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            color: #000;
+            font-size: 14px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .content-area {
+            height: calc(100% - 47px);
+            overflow-y: auto;
+            background: #f9fafb;
+        }
+        .nutrition-chart {
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+        .chart-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-8">
+    <div class="iphone-frame">
+        <div class="iphone-screen">
+            <!-- 状态栏 -->
+            <div class="status-bar">
+                <button class="text-gray-600">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <span class="font-medium">果知详情</span>
+                <button class="text-gray-600">
+                    <i class="fas fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 顶部图片 -->
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400&h=300&fit=crop" 
+                         alt="麒麟西瓜" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <div class="bg-white bg-opacity-90 backdrop-blur-sm rounded-2xl p-4">
+                            <h1 class="text-2xl font-bold text-gray-800">麒麟西瓜</h1>
+                            <p class="text-gray-600 mt-1">甜度13° · 当季水果 · 汁多味甜</p>
+                            <div class="flex items-center justify-between mt-3">
+                                <div>
+                                    <span class="text-3xl font-bold text-green-600">¥3.99</span>
+                                    <span class="text-gray-500 text-sm ml-1">/斤</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">当季</span>
+                                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs">热销</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 基本信息 -->
+                <div class="p-4">
+                    <div class="bg-white rounded-2xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3">基本信息</h3>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <span class="text-gray-500">产地：</span>
+                                <span class="text-gray-800">海南</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">季节：</span>
+                                <span class="text-gray-800">5-9月</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">甜度：</span>
+                                <span class="text-gray-800">12-14°</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">储存：</span>
+                                <span class="text-gray-800">常温3-5天</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 营养成分图表 -->
+                <div class="px-4">
+                    <div class="bg-white rounded-2xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-4">营养成分</h3>
+                        <div class="flex items-center justify-around">
+                            <div class="nutrition-chart">
+                                <svg width="120" height="120" viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="#10b981" stroke-width="8" 
+                                            stroke-dasharray="314" stroke-dashoffset="125" stroke-linecap="round"
+                                            transform="rotate(-90 60 60)"/>
+                                </svg>
+                                <div class="chart-center">
+                                    <div class="text-lg font-bold text-gray-800">92%</div>
+                                    <div class="text-xs text-gray-500">水分</div>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                    <span class="text-sm">水分 92%</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <span class="text-sm">碳水化合物 7.6%</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+                                    <span class="text-sm">蛋白质 0.6%</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <span class="text-sm">脂肪 0.2%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 详细营养数据 -->
+                <div class="px-4 mt-4">
+                    <div class="bg-white rounded-2xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3">营养详情 (每100g)</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-600">热量</span>
+                                <span class="font-medium">30 kcal</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-600">维生素C</span>
+                                <span class="font-medium">8.1 mg</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-600">膳食纤维</span>
+                                <span class="font-medium">0.4 g</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-600">钾</span>
+                                <span class="font-medium">112 mg</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-600">番茄红素</span>
+                                <span class="font-medium">4.5 mg</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 口感描述 -->
+                <div class="px-4 mt-4">
+                    <div class="bg-white rounded-2xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3">口感特点</h3>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">汁多</span>
+                            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">味甜</span>
+                            <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm">脆嫩</span>
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">清爽</span>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            麒麟西瓜果肉鲜红，质地脆嫩，汁水丰富，甜度高且分布均匀，
+                            中心糖度可达13-14度，边缘也在10度以上，口感极佳。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 健康建议 -->
+                <div class="px-4 mt-4">
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-4">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-heart text-red-500 mr-2"></i>
+                            健康建议
+                        </h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-green-500 mt-0.5"></i>
+                                <span class="text-gray-700">夏季补水佳品，有助于预防中暑</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-exclamation-triangle text-yellow-500 mt-0.5"></i>
+                                <span class="text-gray-700">糖尿病患者需控制摄入量</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-info-circle text-blue-500 mt-0.5"></i>
+                                <span class="text-gray-700">建议饭后1小时食用，避免空腹</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 购买建议 -->
+                <div class="px-4 mt-4">
+                    <div class="bg-white rounded-2xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3">如何挑选</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <span class="text-green-600 text-xs font-bold">1</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-sm">看纹路</p>
+                                    <p class="text-xs text-gray-600">纹路清晰、间距宽的更甜</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <span class="text-green-600 text-xs font-bold">2</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-sm">听声音</p>
+                                    <p class="text-xs text-gray-600">轻拍声音清脆表示成熟</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <span class="text-green-600 text-xs font-bold">3</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-sm">看瓜蒂</p>
+                                    <p class="text-xs text-gray-600">瓜蒂新鲜、弯曲的更甜</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 底部操作栏 -->
+                <div class="px-4 py-4 bg-white border-t border-gray-200">
+                    <div class="grid grid-cols-2 gap-3">
+                        <button class="bg-green-500 text-white py-3 rounded-full font-medium flex items-center justify-center">
+                            <i class="fas fa-plus mr-2"></i>
+                            加入对比
+                        </button>
+                        <button class="bg-blue-500 text-white py-3 rounded-full font-medium flex items-center justify-center">
+                            <i class="fas fa-heart mr-2"></i>
+                            推荐给我
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

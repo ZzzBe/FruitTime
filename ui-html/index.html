@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>果识App - 高保真原型展示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .device-frame {
+            width: 393px;
+            height: 852px;
+            border-radius: 47px;
+            background: #000;
+            padding: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        .device-frame:hover {
+            transform: translateY(-5px);
+        }
+        .device-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 37px;
+            background: #fff;
+            overflow: hidden;
+        }
+        .iframe-container {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 37px;
+        }
+        .page-title {
+            background: linear-gradient(135deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-8">
+    <!-- 页面标题 -->
+    <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold page-title mb-2">果识App</h1>
+        <p class="text-gray-600 text-lg">高保真原型展示</p>
+        <p class="text-gray-500 text-sm mt-2">基于微信小程序设计规范 · 可直接用于开发阶段</p>
+    </div>
+
+    <!-- 原型展示区域 -->
+    <div class="max-w-7xl mx-auto">
+        <!-- 第一行 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-8">
+            <!-- 首页 -->
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-home text-green-500 mr-2"></i>
+                    首页
+                </h2>
+                <div class="device-frame">
+                    <div class="device-screen">
+                        <iframe src="home.html" class="iframe-container"></iframe>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-2 text-center">应用入口，快捷功能导航</p>
+            </div>
+
+            <!-- 果识页面 -->
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-camera text-blue-500 mr-2"></i>
+                    果识
+                </h2>
+                <div class="device-frame">
+                    <div class="device-screen">
+                        <iframe src="guoshi.html" class="iframe-container"></iframe>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-2 text-center">拍照识别水果功能</p>
+            </div>
+
+            <!-- 识别结果页 -->
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-search text-purple-500 mr-2"></i>
+                    识别结果
+                </h2>
+                <div class="device-frame">
+                    <div class="device-screen">
+                        <iframe src="result.html" class="iframe-container"></iframe>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-2 text-center">展示识别结果和关键信息</p>
+            </div>
+        </div>
+
+        <!-- 第二行 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-8">
+            <!-- 果知详情页 -->
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-info-circle text-orange-500 mr-2"></i>
+                    果知详情
+                </h2>
+                <div class="device-frame">
+                    <div class="device-screen">
+                        <iframe src="guozhi.html" class="iframe-container"></iframe>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-2 text-center">水果详细信息展示</p>
+            </div>
+
+            <!-- 水果对比页 -->
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-balance-scale text-red-500 mr-2"></i>
+                    水果对比
+                </h2>
+                <div class="device-frame">
+                    <div class="device-screen">
+                        <iframe src="compare.html" class="iframe-container"></iframe>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-2 text-center">多水果参数对比分析</p>
+            </div>
+
+            <!-- 个性化推荐页 -->
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-heart text-pink-500 mr-2"></i>
+                    个性化推荐
+                </h2>
+                <div class="device-frame">
+                    <div class="device-screen">
+                        <iframe src="recommend.html" class="iframe-container"></iframe>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-2 text-center">基于健康档案的个性化推荐</p>
+            </div>
+        </div>
+
+        <!-- 设计说明 -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">设计说明</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-mobile-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">设备规格</h3>
+                    <p class="text-sm text-gray-600">iPhone 15 Pro 屏幕规格<br>393×852px，圆角设计</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-palette text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">设计规范</h3>
+                    <p class="text-sm text-gray-600">微信小程序TDesign规范<br>绿色主题，清新简约</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-code text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">技术栈</h3>
+                    <p class="text-sm text-gray-600">HTML + Tailwind CSS<br>FontAwesome图标库</p>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-gray-200">
+                <h3 class="font-semibold text-gray-800 mb-3 text-center">核心功能流程</h3>
+                <div class="flex flex-wrap justify-center gap-4 text-sm">
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full">拍照识别</span>
+                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">信息查询</span>
+                    <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full">水果对比</span>
+                    <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full">个性推荐</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用说明 -->
+        <div class="bg-gray-800 text-white rounded-2xl p-6 mt-8">
+            <h3 class="text-xl font-semibold mb-3 text-center">使用说明</h3>
+            <div class="text-center text-gray-300">
+                <p class="mb-2">所有原型界面已按iPhone 15 Pro规格设计</p>
+                <p class="mb-2">可直接用于开发阶段，代码结构清晰</p>
+                <p>如需调整，请修改对应HTML文件即可</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

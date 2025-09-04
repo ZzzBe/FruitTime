@@ -1,7 +1,34 @@
 // test/optimization.test.js
 
 // 测试工具函数
-const util = require('../utils/util.js');
+const { 
+  showToast, 
+  showModal,
+  showLoading,
+  hideLoading,
+  formatPrice,
+  formatRating,
+  formatRelativeTime,
+  formatTime,
+  formatFileSize,
+  debounce,
+  throttle,
+  deepClone,
+  isEmptyObject,
+  uniqueArray,
+  querySelector,
+  querySelectorAll,
+  checkNetwork,
+  getSystemInfo,
+  getDeviceInfo,
+  isIPhoneX,
+  getRandomColor,
+  generateGradientColors,
+  validatePhone,
+  validateEmail,
+  getUrlParams,
+  generateId
+} = require('../utils/index.js');
 
 // 测试防抖函数
 console.log('测试防抖函数...');

@@ -1,4 +1,4 @@
-// utils/chart.js
+// utils/chart/chart.js
 // 图表绘制工具类
 
 class ChartRenderer {

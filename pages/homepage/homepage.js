@@ -1,6 +1,15 @@
 // pages/index/index.js
-const util = require('../../utils/util.js');
-const api = require('../../utils/api.js');
+const {
+  showToast,
+  showLoading,
+  hideLoading,
+  debounce,
+  checkNetwork
+} = require('../../utils/index.js');
+
+const {
+  searchFruits
+} = require('../../utils/network/api.js');
 
 Page({
   data: {
@@ -19,7 +28,7 @@ Page({
   onLoad() {
     // 页面加载时执行
     this.loadRecommendedFruit();
-    
+
     // 延迟加载非关键内容
     setTimeout(() => {
       this.setData({
@@ -34,11 +43,11 @@ Page({
     console.log('加载今日推荐水果');
   },
 
-  onSearchInput: util.debounce(function(e) {
+  onSearchInput: debounce(function(e) {
     this.setData({
       searchValue: e.detail.value
     });
-    
+
     if (e.detail.value.trim()) {
       this.performSearch(e.detail.value);
     }
@@ -83,10 +92,10 @@ Page({
       clearTimeout(this.searchTimer);
     }
   },
-  
+
   onShow() {
     // 页面显示时检查网络状态
-    util.checkNetwork()
+    checkNetwork()
       .then(networkType => {
         console.log('当前网络状态:', networkType);
       })

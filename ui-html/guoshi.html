@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>果识 - 拍照识别</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .iphone-frame {
+            width: 393px;
+            height: 852px;
+            border-radius: 47px;
+            background: #000;
+            padding: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 37px;
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        .status-bar {
+            height: 47px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            color: #000;
+            font-size: 14px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .content-area {
+            height: calc(100% - 47px - 83px);
+            overflow-y: auto;
+            background: #f9fafb;
+        }
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 83px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .camera-view {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-8">
+    <div class="iphone-frame">
+        <div class="iphone-screen">
+            <!-- 状态栏 -->
+            <div class="status-bar">
+                <button class="text-gray-600">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <span class="font-medium">果识</span>
+                <button class="text-gray-600">
+                    <i class="fas fa-ellipsis-h"></i>
+                </button>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 相机预览区域 -->
+                <div class="camera-view h-96 relative">
+                    <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=400&h=400&fit=crop" 
+                         alt="相机预览" class="w-full h-full object-cover opacity-80">
+                    
+                    <!-- 扫描框 -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-64 h-64 border-2 border-white border-opacity-60 rounded-lg relative">
+                            <!-- 扫描线动画 -->
+                            <div class="absolute top-0 left-0 right-0 h-0.5 bg-white opacity-80 animate-pulse"></div>
+                            <!-- 四个角 -->
+                            <div class="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-white"></div>
+                            <div class="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-white"></div>
+                            <div class="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-white"></div>
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-white"></div>
+                        </div>
+                    </div>
+
+                    <!-- 顶部提示 -->
+                    <div class="absolute top-8 left-4 right-4">
+                        <div class="bg-black bg-opacity-50 text-white text-center py-2 px-4 rounded-full text-sm">
+                            请将水果放入框内，保持清晰
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 识别模式选择 -->
+                <div class="p-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <button class="bg-white rounded-xl p-4 shadow-sm border-2 border-green-500">
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-camera text-green-600 text-xl"></i>
+                                </div>
+                                <p class="font-medium text-sm">拍照识别</p>
+                                <p class="text-xs text-gray-500 mt-1">识别水果实物</p>
+                            </div>
+                        </button>
+                        
+                        <button class="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-barcode text-gray-600 text-xl"></i>
+                                </div>
+                                <p class="font-medium text-sm">条形码识别</p>
+                                <p class="text-xs text-gray-500 mt-1">扫描商品标签</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 识别历史 -->
+                <div class="px-4 pb-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-lg font-semibold">最近识别</h3>
+                        <button class="text-green-600 text-sm">查看全部</button>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="bg-white rounded-xl p-3 shadow-sm flex items-center space-x-3">
+                            <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=60&h=60&fit=crop" 
+                                 alt="西瓜" class="w-12 h-12 rounded-lg object-cover">
+                            <div class="flex-1">
+                                <h4 class="font-medium text-sm">麒麟西瓜</h4>
+                                <p class="text-xs text-gray-500">2分钟前 · 甜度13°</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 text-sm"></i>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-3 shadow-sm flex items-center space-x-3">
+                            <img src="https://images.unsplash.com/photo-1528821128474-27f963b062bf?w=60&h=60&fit=crop" 
+                                 alt="草莓" class="w-12 h-12 rounded-lg object-cover">
+                            <div class="flex-1">
+                                <h4 class="font-medium text-sm">红颜草莓</h4>
+                                <p class="text-xs text-gray-500">5分钟前 · 甜度11°</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 text-sm"></i>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-3 shadow-sm flex items-center space-x-3">
+                            <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=60&h=60&fit=crop" 
+                                 alt="芒果" class="w-12 h-12 rounded-lg object-cover">
+                            <div class="flex-1">
+                                <h4 class="font-medium text-sm">台农芒果</h4>
+                                <p class="text-xs text-gray-500">10分钟前 · 甜度15°</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 拍照按钮 -->
+                <div class="px-4 pb-8">
+                    <button class="w-full bg-green-500 text-white py-4 rounded-full font-medium shadow-lg hover:bg-green-600 transition-colors">
+                        <i class="fas fa-camera mr-2"></i>
+                        立即拍照识别
+                    </button>
+                </div>
+            </div>
+
+            <!-- 底部导航 -->
+            <div class="bottom-nav">
+                <button class="flex flex-col items-center text-gray-400">
+                    <i class="fas fa-home text-xl mb-1"></i>
+                    <span class="text-xs">首页</span>
+                </button>
+                <button class="flex flex-col items-center text-green-600">
+                    <i class="fas fa-camera text-xl mb-1"></i>
+                    <span class="text-xs">果识</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-400">
+                    <i class="fas fa-info-circle text-xl mb-1"></i>
+                    <span class="text-xs">果知</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-400">
+                    <i class="fas fa-heart text-xl mb-1"></i>
+                    <span class="text-xs">果然</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-400">
+                    <i class="fas fa-user text-xl mb-1"></i>
+                    <span class="text-xs">我的</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

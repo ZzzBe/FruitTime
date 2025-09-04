@@ -1,6 +1,13 @@
 // pages/fruit-detail/index.js
-const util = require('../../utils/util.js');
-const api = require('../../utils/api.js');
+const {
+  showToast,
+  showLoading,
+  hideLoading
+} = require('../../utils/index.js');
+
+const {
+  getFruitDetail
+} = require('../../utils/network/api.js');
 
 Page({
   data: {
@@ -75,7 +82,7 @@ Page({
         }
       })
       .catch(err => {
-        util.showToast('获取水果详情失败');
+        showToast('获取水果详情失败');
         console.error('获取水果详情失败:', err);
       });
   },
@@ -92,7 +99,7 @@ Page({
       url: '/pages/fruit-recommend/fruit-recommend'
     });
   },
-  
+
   onShareAppMessage() {
     // 分享功能
     return {

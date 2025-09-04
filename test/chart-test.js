@@ -67,7 +67,7 @@ const originalWx = global.wx;
 global.wx = mockWx;
 
 // 导入图表工具
-const { ChartRenderer, TagCloud } = require('../utils/chart.js');
+const { ChartRenderer, TagCloud } = require('../utils/chart/chart.js');
 
 async function runChartTests() {
   console.log('开始图表功能测试...\n');

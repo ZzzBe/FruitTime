@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水果对比</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .iphone-frame {
+            width: 393px;
+            height: 852px;
+            border-radius: 47px;
+            background: #000;
+            padding: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 37px;
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        .status-bar {
+            height: 47px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            color: #000;
+            font-size: 14px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .content-area {
+            height: calc(100% - 47px);
+            overflow-y: auto;
+            background: #f9fafb;
+        }
+        .comparison-card {
+            transition: all 0.3s ease;
+        }
+        .comparison-card:hover {
+            transform: translateY(-2px);
+        }
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-8">
+    <div class="iphone-frame">
+        <div class="iphone-screen">
+            <!-- 状态栏 -->
+            <div class="status-bar">
+                <button class="text-gray-600">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <span class="font-medium">水果对比</span>
+                <button class="text-gray-600">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 对比水果列表 -->
+                <div class="p-4">
+                    <div class="flex space-x-3 overflow-x-auto pb-2">
+                        <!-- 麒麟西瓜 -->
+                        <div class="comparison-card bg-white rounded-xl p-3 shadow-sm flex-shrink-0 w-32">
+                            <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=100&h=100&fit=crop" 
+                                 alt="麒麟西瓜" class="w-20 h-20 rounded-lg object-cover mx-auto mb-2">
+                            <h4 class="font-medium text-sm text-center">麒麟西瓜</h4>
+                            <p class="text-green-600 font-semibold text-center text-sm mt-1">¥3.99/斤</p>
+                            <button class="w-full mt-2 text-red-500 text-xs">
+                                <i class="fas fa-times"></i> 移除
+                            </button>
+                        </div>
+                        
+                        <!-- 无籽西瓜 -->
+                        <div class="comparison-card bg-white rounded-xl p-3 shadow-sm flex-shrink-0 w-32">
+                            <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=100&h=100&fit=crop" 
+                                 alt="无籽西瓜" class="w-20 h-20 rounded-lg object-cover mx-auto mb-2">
+                            <h4 class="font-medium text-sm text-center">无籽西瓜</h4>
+                            <p class="text-green-600 font-semibold text-center text-sm mt-1">¥4.50/斤</p>
+                            <button class="w-full mt-2 text-red-500 text-xs">
+                                <i class="fas fa-times"></i> 移除
+                            </button>
+                        </div>
+                        
+                        <!-- 黑美人西瓜 -->
+                        <div class="comparison-card bg-white rounded-xl p-3 shadow-sm flex-shrink-0 w-32">
+                            <img src="https://images.unsplash.com/photo-1576153192396-180ecef2a715?w=100&h=100&fit=crop" 
+                                 alt="黑美人西瓜" class="w-20 h-20 rounded-lg object-cover mx-auto mb-2">
+                            <h4 class="font-medium text-sm text-center">黑美人西瓜</h4>
+                            <p class="text-green-600 font-semibold text-center text-sm mt-1">¥5.20/斤</p>
+                            <button class="w-full mt-2 text-red-500 text-xs">
+                                <i class="fas fa-times"></i> 移除
+                            </button>
+                        </div>
+                        
+                        <!-- 添加更多 -->
+                        <div class="bg-gray-100 rounded-xl p-3 flex-shrink-0 w-32 flex items-center justify-center border-2 border-dashed border-gray-300">
+                            <div class="text-center">
+                                <i class="fas fa-plus text-gray-400 text-2xl mb-2"></i>
+                                <p class="text-gray-500 text-xs">添加水果</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 对比结果总结 -->
+                <div class="px-4 mb-4">
+                    <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl p-4 text-white">
+                        <h3 class="font-semibold mb-2">智能推荐</h3>
+                        <p class="text-sm opacity-90">
+                            根据您的健康档案，推荐选择<strong>麒麟西瓜</strong>：
+                            价格适中，甜度高，适合日常补水需求。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 详细对比表格 -->
+                <div class="px-4 pb-4">
+                    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                        <!-- 表头 -->
+                        <div class="bg-gray-50 p-3">
+                            <div class="grid grid-cols-4 gap-2 text-sm font-medium">
+                                <div></div>
+                                <div class="text-center">麒麟西瓜</div>
+                                <div class="text-center">无籽西瓜</div>
+                                <div class="text-center">黑美人西瓜</div>
+                            </div>
+                        </div>
+                        
+                        <!-- 价格对比 -->
+                        <div class="border-b border-gray-100 p-3">
+                            <div class="grid grid-cols-4 gap-2 text-sm items-center">
+                                <div class="font-medium text-gray-700">价格</div>
+                                <div class="text-center">
+                                    <span class="text-green-600 font-bold">¥3.99</span>
+                                    <div class="text-xs text-gray-500">最优</div>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-gray-800">¥4.50</span>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-gray-800">¥5.20</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 甜度对比 -->
+                        <div class="border-b border-gray-100 p-3">
+                            <div class="grid grid-cols-4 gap-2 text-sm items-center">
+                                <div class="font-medium text-gray-700">甜度</div>
+                                <div class="text-center">
+                                    <span class="text-gray-800">13°</span>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-gray-800">12°</span>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-green-600 font-bold">14°</span>
+                                    <div class="text-xs text-gray-500">最甜</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 水分对比 -->
+                        <div class="border-b border-gray-100 p-3">
+                            <div class="grid grid-cols-4 gap-2 text-sm items-center">
+                                <div class="font-medium text-gray-700">水分</div>
+                                <div class="text-center">
+                                    <span class="text-gray-800">92%</span>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-green-600 font-bold">93%</span>
+                                    <div class="text-xs text-gray-500">最高</div>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-gray-800">91%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 热量对比 -->
+                        <div class="border-b border-gray-100 p-3">
+                            <div class="grid grid-cols-4 gap-2 text-sm items-center">
+                                <div class="font-medium text-gray-700">热量</div>
+                                <div class="text-center">
+                                    <span class="text-green-600 font-bold">30 kcal</span>
+                                    <div class="text-xs text-gray-500">最低</div>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-gray-800">31 kcal</span>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-gray-800">32 kcal</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 维生素C对比 -->
+                        <div class="border-b border-gray-100 p-3">
+                            <div class="grid grid-cols-4 gap-2 text-sm items-center">
+                                <div class="font-medium text-gray-700">维生素C</div>
+                                <div class="text-center">
+                                    <span class="text-gray-800">8.1mg</span>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-green-600 font-bold">8.5mg</span>
+                                    <div class="text-xs text-gray-500">最高</div>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-gray-800">7.8mg</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 口感评分 -->
+                        <div class="p-3">
+                            <div class="grid grid-cols-4 gap-2 text-sm items-center">
+                                <div class="font-medium text-gray-700">口感评分</div>
+                                <div class="text-center">
+                                    <div class="flex justify-center">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">4.8分</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="flex justify-center">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="far fa-star text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">4.2分</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="flex justify-center">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star-half-alt text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs text-gray-500">4.5分</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 可视化对比 -->
+                <div class="px-4 pb-4">
+                    <div class="bg-white rounded-2xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-4">营养对比可视化</h3>
+                        
+                        <!-- 价格对比条 -->
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-600">价格对比</span>
+                                <span class="text-xs text-gray-500">越低越好</span>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs w-16">麒麟西瓜</span>
+                                    <div class="flex-1 progress-bar">
+                                        <div class="progress-fill bg-green-500" style="width: 77%"></div>
+                                    </div>
+                                    <span class="text-xs w-12 text-right">¥3.99</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs w-16">无籽西瓜</span>
+                                    <div class="flex-1 progress-bar">
+                                        <div class="progress-fill bg-yellow-500" style="width: 87%"></div>
+                                    </div>
+                                    <span class="text-xs w-12 text-right">¥4.50</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs w-16">黑美人</span>
+                                    <div class="flex-1 progress-bar">
+                                        <div class="progress-fill bg-red-500" style="width: 100%"></div>
+                                    </div>
+                                    <span class="text-xs w-12 text-right">¥5.20</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 甜度对比条 -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-600">甜度对比</span>
+                                <span class="text-xs text-gray-500">越高越好</span>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs w-16">麒麟西瓜</span>
+                                    <div class="flex-1 progress-bar">
+                                        <div class="progress-fill bg-purple-500" style="width: 93%"></div>
+                                    </div>
+                                    <span class="text-xs w-12 text-right">13°</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs w-16">无籽西瓜</span>
+                                    <div class="flex-1 progress-bar">
+                                        <div class="progress-fill bg-purple-500" style="width: 86%"></div>
+                                    </div>
+                                    <span class="text-xs w-12 text-right">12°</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs w-16">黑美人</span>
+                                    <div class="flex-1 progress-bar">
+                                        <div class="progress-fill bg-purple-500" style="width: 100%"></div>
+                                    </div>
+                                    <span class="text-xs w-12 text-right">14°</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

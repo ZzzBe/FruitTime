@@ -1,9 +1,71 @@
 // pages/fruit-compare/fruit-compare.js
-const util = require('../../utils/util.js');
-const api = require('../../utils/api.js');
-const { ChartRenderer, TagCloud } = require('../../utils/chart.js');
+/**
+ * 果知 - 水果对比页面
+ *
+ * 功能说明：
+ * 1. 支持最多4种水果的对比
+ * 2. 提供多种维度的对比：基础信息、营养成分、价格趋势、口感特征、糖酸度
+ * 3. 数据可视化展示：雷达图、折线图、柱状图、标签云
+ * 4. 智能推荐功能
+ * 5. 支持导出对比图表
+ */
 
+// 引入工具函数
+const {
+  showToast,
+  showModal,
+  formatPrice,
+  formatRating,
+  formatRelativeTime,
+  debounce,
+  throttle,
+  deepClone,
+  isEmptyObject,
+  uniqueArray,
+  querySelector,
+  querySelectorAll,
+  checkNetwork,
+  getSystemInfo,
+  getDeviceInfo,
+  isIPhoneX,
+  getRandomColor,
+  generateGradientColors,
+  handleApiError,
+  handleNetworkError,
+  handlePromiseError
+} = require('../../utils/index.js');
+
+const {
+  getFruitDetail,
+  getFruitComparison,
+  getRecommendations,
+  searchFruits,
+  getIdentifyHistory,
+  identifyImage,
+  getUserHealthData,
+  updateUserHealthData,
+  getUserFavorites,
+  addFavorite,
+  removeFavorite
+} = require('../../utils/network/api.js');
+
+const { ChartRenderer, TagCloud } = require('../../utils/chart/chart.js');
+
+// 引入混入
+const commonMixin = require('../mixins/common.js');
+const chartMixin = require('../mixins/chart.js');
+
+/**
+ * 页面配置
+ */
 Page({
+  // 应用混入，复用通用功能
+  ...commonMixin,
+  ...chartMixin,
+
+  /**
+   * 页面数据
+   */
   data: {
     // 对比水果列表
     comparisonFruits: [],
@@ -27,32 +89,44 @@ Page({
     chartsLoaded: false
   },
 
+  /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad() {
     // 页面加载时执行
     this.loadComparisonData();
   },
 
+  /**
+   * 生命周期函数--监听页面显示
+   */
   onShow() {
     // 页面显示时刷新数据
     this.loadComparisonData();
   },
 
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
   onReady() {
     // 页面渲染完成后初始化图表
     this.initCharts();
   },
 
-  // 初始化图表
+  /**
+   * 初始化图表
+   * 创建各种图表的渲染器实例
+   */
   async initCharts() {
     // 初始化雷达图
     this.radarChart = new ChartRenderer('radarChart');
-    
+
     // 初始化折线图
     this.lineChart = new ChartRenderer('lineChart');
-    
+
     // 初始化柱状图
     this.barChart = new ChartRenderer('barChart');
-    
+
     // 初始化标签云
     this.tagCloud = new TagCloud('tagCloud');
   },
@@ -61,11 +135,11 @@ Page({
   loadComparisonData() {
     const app = getApp();
     const fruits = app.getComparisonList();
-    
+
     this.setData({
       comparisonFruits: fruits
     });
-    
+
     // 如果有水果，加载详细对比数据
     if (fruits.length > 0) {
       this.loadDetailedComparisonData(fruits);
@@ -74,10 +148,8 @@ Page({
 
   // 加载详细对比数据
   loadDetailedComparisonData(fruits) {
-    this.setData({
-      loading: true
-    });
-    
+    this.showPageLoading();
+
     // 模拟API调用获取详细数据
     // 实际项目中这里会调用api.getComparisonData
     setTimeout(() => {
@@ -87,14 +159,13 @@ Page({
       const tasteData = this.generateTasteData(fruits);
       const sugarData = this.generateSugarData(fruits);
       const recommendation = this.generateRecommendation(fruits);
-      
+
       this.setData({
         nutritionData,
         priceData,
         tasteData,
         sugarData,
         recommendation,
-        loading: false,
         chartsLoaded: true
       }, () => {
         // 数据加载完成后渲染图表
@@ -102,10 +173,16 @@ Page({
           this.renderChart();
         }
       });
+
+      this.hidePageLoading();
     }, 1000);
   },
 
-  // 生成营养成分对比数据
+  /**
+   * 生成营养成分对比数据
+   * @param {Array} fruits - 水果列表
+   * @returns {Object} 营养成分数据对象
+   */
   generateNutritionData(fruits) {
     // 定义营养成分维度
     const nutrients = [
@@ -115,7 +192,7 @@ Page({
       { key: 'vitamin_c', name: '维生素C', unit: 'mg', max: 100 },
       { key: 'potassium', name: '钾', unit: 'mg', max: 2000 }
     ];
-    
+
     // 为每个水果生成营养数据
     const data = {};
     nutrients.forEach(nutrient => {
@@ -136,22 +213,26 @@ Page({
         })
       };
     });
-    
+
     return data;
   },
 
-  // 生成价格趋势对比数据
+  /**
+   * 生成价格趋势对比数据
+   * @param {Array} fruits - 水果列表
+   * @returns {Object} 价格趋势数据对象
+   */
   generatePriceData(fruits) {
     // 生成最近6个月的价格数据
     const months = [];
     const now = new Date();
-    
+
     for (let i = 5; i >= 0; i--) {
       const date = new Date(now);
       date.setMonth(date.getMonth() - i);
       months.push(`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`);
     }
-    
+
     // 为每个水果生成价格数据
     const data = fruits.map(fruit => {
       const prices = months.map(month => {
@@ -163,25 +244,29 @@ Page({
           price: parseFloat((basePrice + fluctuation).toFixed(2))
         };
       });
-      
+
       return {
         fruitId: fruit.id,
         fruitName: fruit.name,
         prices
       };
     });
-    
+
     return {
       months,
       data
     };
   },
 
-  // 生成口感特征对比数据
+  /**
+   * 生成口感特征对比数据
+   * @param {Array} fruits - 水果列表
+   * @returns {Object} 口感特征数据对象
+   */
   generateTasteData(fruits) {
     // 定义口感特征维度
     const tasteFeatures = ['甜', '酸', '脆', '软', '多汁', '香', '清爽', '浓郁'];
-    
+
     // 为每个水果生成口感数据
     const data = fruits.map(fruit => {
       const features = tasteFeatures.map(feature => {
@@ -193,14 +278,14 @@ Page({
           percent: (score / 5) * 100
         };
       });
-      
+
       return {
         fruitId: fruit.id,
         fruitName: fruit.name,
         features
       };
     });
-    
+
     // 生成标签云数据
     const tagCloudData = [];
     data.forEach(fruit => {
@@ -211,7 +296,7 @@ Page({
         });
       });
     });
-    
+
     return {
       features: tasteFeatures,
       data,
@@ -219,14 +304,18 @@ Page({
     };
   },
 
-  // 生成糖酸度对比数据
+  /**
+   * 生成糖酸度对比数据
+   * @param {Array} fruits - 水果列表
+   * @returns {Array} 糖酸度数据数组
+   */
   generateSugarData(fruits) {
     // 为每个水果生成糖酸度数据
     const data = fruits.map(fruit => {
       // 模拟糖度和酸度数据
       const brix = 8 + Math.random() * 8; // 8-16°Bx
       const acid = 0.1 + Math.random() * 1.5; // 0.1-1.6g/100g
-      
+
       return {
         fruitId: fruit.id,
         fruitName: fruit.name,
@@ -240,50 +329,58 @@ Page({
         }
       };
     });
-    
+
     return data;
   },
 
-  // 生成智能推荐
+  /**
+   * 生成智能推荐
+   * 基于用户健康档案和对比水果生成推荐
+   * @param {Array} fruits - 水果列表
+   * @returns {Object|null} 推荐结果
+   */
   generateRecommendation(fruits) {
     const app = getApp();
     const healthData = app.globalData.healthData;
-    
+
     // 简单的推荐算法
     let bestFruit = null;
     let bestScore = -1;
-    
+
     fruits.forEach(fruit => {
       let score = 0;
-      
+
       // 根据健康数据评分
       if (healthData.conditions && healthData.conditions.includes('糖尿病')) {
         // 糖尿病患者优先低糖水果
         score += Math.random() * (10 - fruit.sugar || 0);
       }
-      
+
       if (healthData.weightGoal === 'lose') {
         // 减脂者优先低热量水果
         score += Math.random() * (100 - fruit.calories || 0) / 10;
       }
-      
+
       if (score > bestScore) {
         bestScore = score;
         bestFruit = fruit;
       }
     });
-    
+
     if (bestFruit) {
       return {
         fruit: bestFruit,
         reason: `根据您的健康档案，推荐选择${bestFruit.name}：综合评分最高，适合您的健康需求。`
       };
     }
-    
+
     return null;
   },
 
-  // 切换对比维度
+  /**
+   * 切换对比维度
+   * @param {Object} e - 事件对象
+   */
   switchDimension(e) {
     const dimension = e.currentTarget.dataset.dimension;
     this.setData({
@@ -300,31 +397,34 @@ Page({
   async renderChart() {
     try {
       switch (this.data.activeDimension) {
-        case 'nutrition':
-          await this.renderRadarChart();
-          break;
-        case 'price':
-          await this.renderLineChart();
-          break;
-        case 'taste':
-          await this.renderTagCloud();
-          break;
-        case 'sugar':
-          await this.renderBarChart();
-          break;
+      case 'nutrition':
+        await this.renderRadarChart();
+        break;
+      case 'price':
+        await this.renderLineChart();
+        break;
+      case 'taste':
+        await this.renderTagCloud();
+        break;
+      case 'sugar':
+        await this.renderBarChart();
+        break;
       }
     } catch (error) {
       console.error('图表渲染失败:', error);
-      util.showToast('图表渲染失败');
+      showToast('图表渲染失败');
     }
   },
 
-  // 渲染雷达图
+  /**
+   * 渲染雷达图 - 营养成分对比
+   * @returns {Promise<void>}
+   */
   async renderRadarChart() {
     if (!this.radarChart || !this.data.nutritionData) return;
-    
+
     await this.radarChart.init();
-    
+
     // 准备雷达图数据
     const labels = ['热量', '糖分', '膳食纤维', '维生素C', '钾'];
     const datasets = this.data.comparisonFruits.map((fruit, index) => {
@@ -339,23 +439,26 @@ Page({
         ]
       };
     });
-    
+
     const chartData = {
       labels,
       datasets
     };
-    
+
     this.radarChart.drawRadarChart(chartData, {
       title: '营养成分对比（百分比）'
     });
   },
 
-  // 渲染折线图
+  /**
+   * 渲染折线图 - 价格趋势对比
+   * @returns {Promise<void>}
+   */
   async renderLineChart() {
     if (!this.lineChart || !this.data.priceData) return;
-    
+
     await this.lineChart.init();
-    
+
     // 准备折线图数据
     const labels = this.data.priceData.months;
     const datasets = this.data.priceData.data.map(fruit => {
@@ -364,37 +467,43 @@ Page({
         data: fruit.prices.map(p => p.price)
       };
     });
-    
+
     const chartData = {
       labels,
       datasets
     };
-    
+
     this.lineChart.drawLineChart(chartData, {
       title: '价格趋势对比（元/斤）'
     });
   },
 
-  // 渲染标签云
+  /**
+   * 渲染标签云 - 口感特征对比
+   * @returns {Promise<void>}
+   */
   async renderTagCloud() {
     if (!this.tagCloud || !this.data.tasteData) return;
-    
+
     await this.tagCloud.init();
-    
+
     // 准备标签云数据
     const tags = this.data.tasteData.tagCloudData;
-    
+
     this.tagCloud.drawTagCloud(tags, {
       title: '口感特征对比'
     });
   },
 
-  // 渲染柱状图
+  /**
+   * 渲染柱状图 - 糖酸度对比
+   * @returns {Promise<void>}
+   */
   async renderBarChart() {
     if (!this.barChart || !this.data.sugarData) return;
-    
+
     await this.barChart.init();
-    
+
     // 准备柱状图数据
     const labels = this.data.comparisonFruits.map(fruit => fruit.name);
     const datasets = [
@@ -407,71 +516,77 @@ Page({
         data: this.data.sugarData.map(item => item.acid.value)
       }
     ];
-    
+
     const chartData = {
       labels,
       datasets
     };
-    
+
     this.barChart.drawBarChart(chartData, {
       title: '糖酸度对比'
     });
   },
 
-  // 导出图表
+  /**
+   * 导出图表
+   * @param {Object} e - 事件对象
+   */
   async exportChart(e) {
     const type = e.currentTarget.dataset.type;
     let chartInstance;
     let tempFilePath;
-    
+
     try {
       switch (type) {
-        case 'radar':
-          chartInstance = this.radarChart;
-          break;
-        case 'line':
-          chartInstance = this.lineChart;
-          break;
-        case 'bar':
-          chartInstance = this.barChart;
-          break;
-        case 'tagcloud':
-          chartInstance = this.tagCloud;
-          break;
-        default:
-          util.showToast('不支持的图表类型');
-          return;
-      }
-      
-      if (!chartInstance) {
-        util.showToast('图表未初始化');
+      case 'radar':
+        chartInstance = this.radarChart;
+        break;
+      case 'line':
+        chartInstance = this.lineChart;
+        break;
+      case 'bar':
+        chartInstance = this.barChart;
+        break;
+      case 'tagcloud':
+        chartInstance = this.tagCloud;
+        break;
+      default:
+        showToast('不支持的图表类型');
         return;
       }
-      
+
+      if (!chartInstance) {
+        showToast('图表未初始化');
+        return;
+      }
+
       // 保存图表为图片
       tempFilePath = await chartInstance.saveChart();
-      
+
       // 保存到相册
       wx.saveImageToPhotosAlbum({
         filePath: tempFilePath,
         success: () => {
-          util.showToast('已保存到相册', 'success');
+          showToast('已保存到相册', 'success');
         },
         fail: (err) => {
           console.error('保存图片失败:', err);
-          util.showToast('保存失败');
+          showToast('保存失败');
         }
       });
     } catch (error) {
       console.error('导出图表失败:', error);
-      util.showToast('导出失败');
+      showToast('导出失败');
     }
   },
 
-  // 移除水果
+  /**
+   * 移除水果
+   * @param {Object} e - 事件对象
+   */
   removeFruit(e) {
     const id = e.currentTarget.dataset.id;
-    
+
     wx.showModal({
       title: '移除水果',
       content: '确定要从对比列表中移除该水果吗？',
@@ -480,32 +595,34 @@ Page({
         if (res.confirm) {
           const app = getApp();
           app.removeFromComparison(id);
-          
+
           // 更新页面数据
-          const newFruits = this.data.comparisonFruits.filter(fruit => fruit.id != id);
+          const newFruits = this.data.comparisonFruits.filter(fruit => fruit.id !== id);
           this.setData({
             comparisonFruits: newFruits
           });
-          
-          util.showToast('已移除', 'success');
+
+          showToast('已移除', 'success');
         }
       }
     });
   },
 
-  // 添加更多水果
+  /**
+   * 添加更多水果
+   */
   addMoreFruits() {
     if (this.data.comparisonFruits.length >= this.data.maxFruits) {
-      util.showToast(`最多可对比${this.data.maxFruits}种水果`);
+      showToast(`最多可对比${this.data.maxFruits}种水果`);
       return;
     }
-    
+
     // 跳转到水果选择页面
     wx.navigateTo({
       url: '/pages/fruit-select/fruit-select'
     });
   },
-  
+
   // 查看水果详情
   viewFruitDetail(e) {
     const id = e.currentTarget.dataset.id;
@@ -513,13 +630,15 @@ Page({
       url: '/pages/fruit-detail/fruit-detail?id=' + id
     });
   },
-  
-  // 清空对比列表
+
+  /**
+   * 清空对比列表
+   */
   clearComparison() {
     if (this.data.comparisonFruits.length === 0) {
       return;
     }
-    
+
     wx.showModal({
       title: '清空对比',
       content: '确定要清空所有对比水果吗？',
@@ -528,7 +647,7 @@ Page({
         if (res.confirm) {
           const app = getApp();
           app.clearComparisonList();
-          
+
           // 更新页面数据
           this.setData({
             comparisonFruits: [],
@@ -538,8 +657,8 @@ Page({
             sugarData: null,
             recommendation: null
           });
-          
-          util.showToast('已清空', 'success');
+
+          showToast('已清空', 'success');
         }
       }
     });

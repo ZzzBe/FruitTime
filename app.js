@@ -1,4 +1,16 @@
 // app.js
+const { 
+  showToast,
+  showModal,
+  formatPrice,
+  formatRating,
+  formatRelativeTime,
+  showLoading,
+  hideLoading,
+  deepClone,
+  isEmptyObject,
+  uniqueArray
+} = require('./utils/index.js');
 
 App({
   onLaunch() {
